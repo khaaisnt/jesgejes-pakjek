@@ -33,8 +33,8 @@ const getAllTrain = async (): Promise<Train[]> => {
 
     return (
         <div className="w-full p-5 bg-white h-screen">
-            <h1 className="text-xl font-semibold text-black">Data Kereta</h1>
-            <span className="text-sm text-black">
+            <h1 className="text-2xl font-bold text-black">Data Kereta</h1>
+            <span className="text-base text-black">
                 Halaman ini memuat data kereta api yang tersedia
             </span>
             <div className="my-3">

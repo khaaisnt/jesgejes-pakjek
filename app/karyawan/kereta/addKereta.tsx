@@ -76,7 +76,7 @@ const AddKereta = () => {
   return (
     <div>
       <ToastContainer containerId={'toastAdd'}/>
-        <button type="submit" className="px-4 py-2 rounded-md bg-lime-600 hover:bg-lime-500 text-white"
+        <button type="submit" className="px-4 py-2 rounded-md bg-purple-600 hover:bg-purple-500 text-white"
         onClick={() => openModal()}
         >
             Tambah Kereta

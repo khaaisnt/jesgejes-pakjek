@@ -13,9 +13,9 @@ const TrainData = (
     { item }: props
 ) => {
   return (
-    <div className="w-full flex flex-wrap my-2 border border-black text-black rounded-md">
+    <div className="w-full flex flex-wrap my-2 shadow-md bg-slate-50 text-black rounded-lg">
         <div className="w-full flex flex-col  md:w-4/12 p-2">
-            <small className="text-sm font-medium">
+            <small className="text-sm text-blue-700 font-medium">
                 Nama Kereta
             </small>
             <span >
@@ -25,19 +25,19 @@ const TrainData = (
             </span>
         </div>
         <div className="w-full flex flex-col  md:w-4/12 p-2">
-            <small className="text-sm font-medium">
+            <small className="text-sm text-blue-700 font-medium">
                 Deskripsi
             </small>
             <span >{item.descriptions}</span>
         </div>
         <div className="w-full flex flex-col  md:w-2/12 p-2">
-            <small className="text-sm font-medium">
+            <small className="text-sm text-blue-700 font-medium">
                 Tipe Kereta
             </small>
             <span >{item.type}</span>
         </div>
         <div className="w-full flex flex-col  md:w-2/12 p-2">
-            <small className="text-sm font-medium">
+            <small className="text-sm text-blue-700 font-medium">
                 Opsi
             </small>
             <div className="flex gap-2 items-center">

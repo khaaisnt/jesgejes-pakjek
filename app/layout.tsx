@@ -3,8 +3,8 @@ import "./globals.css";
 import "react-toastify/ReactToastify.css"
 
 export const metadata: Metadata = {
-  title: "Tix Train",
-  description: "Sekopling Express",
+  title: "Tiket Kereta",
+  description: "Sekopling Tiket Kereta",
 };
 
 export default function RootLayout({
