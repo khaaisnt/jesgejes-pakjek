@@ -2,12 +2,10 @@
 
 import axios from "axios";
 
-const config = axios.create({
-    baseURL: process.env.BASE_URL,
+export const axiosInstance = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL,
     headers: {
         "Content-Type": "application/json",
-        "APP-KEY": process.env.APP_KEY
+        "APP-KEY": process.env.NEXT_PUBLIC_APP_KEY
     }
 })
-
-export default config;
