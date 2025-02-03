@@ -41,7 +41,7 @@ const Addgerbong = (myprops: props) => {
     const response: any = await axiosInstance.post('/train/wagon', {
       name,
       seat_count: seatCount,
-      train_id: trainId,
+      train_id: Number(trainId),
     },
     {
       headers: {
@@ -79,19 +79,45 @@ const Addgerbong = (myprops: props) => {
     <div>
       <ToastContainer containerId={`toastAddGerbong`}/>
         <button type='button' 
-        className='px-4 py-2 rounded-md bg-green-600 hover:bg-green-500 text-white'>
+        className='px-4 py-2 rounded-md bg-green-600 hover:bg-green-500 text-white'
+        onClick={() => openModal()}
+        >
             Tambah Gerbong
         </button>
         <Modal isShow={show}>
           <form onSubmit={handleSubmit}>
           <div className="w-full p-3 rounded-t-md">
-              <h1 className="font-semibold text-lg text-black">Tambah Gerbong</h1>
+              <h1 className="font-semibold text-lg text-black">Tambah Gerbong Kereta</h1>
               <span className="text-sm text-slate-500">
                 Pastikan data terisi dengan benar
               </span>
             </div>
 
+            <div className="w-full p-3">
+              <div className="my-2 border rounded-md p-3">
+                <small className="text-sm font-semibold text-sky-600">
+                  Nama Gerbong
+                </small>
+                <input type="text" id="name" 
+                value={name} 
+                onChange={(e) => setName(e.target.value)}
+                required 
+                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black" 
+                />
+              </div>
 
+              <div className="my-2 border rounded-md p-3">
+                <small className="text-sm font-semibold text-sky-600">
+                 Jumlah Kursi
+                </small>
+                <input type="text" id="descriptions" 
+                value={seatCount.toString()} 
+                onChange={(e) => setSeatCount(Number(e.target.value))}
+                required 
+                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
+                />
+              </div>
+            </div>
 
             <div className="w-full p-3 rounded-b-lg flex items-center justify-end gap-2">
              <button type="button" onClick={() => closeModal()}
