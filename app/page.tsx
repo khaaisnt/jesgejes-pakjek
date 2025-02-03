@@ -47,11 +47,11 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="w-dvh h-dvh flex justify-center items-center bg-white">
+    <div className="w-dvh h-dvh flex justify-center items-center">
       <ToastContainer containerId={'toastLogin'}/>
       <form action="" className='w-5/6 md:w-1/2 border rounded-lg ' onSubmit={(e) => handleSubmit(e)}>
       <div className='w-full bg-blue-600 text-white p-3'>
-        <h1 className='text-xl font-semibold'>Login</h1>
+      Login
       </div>
       <div className='w-full p-5'>
         <div className='mb-3'>

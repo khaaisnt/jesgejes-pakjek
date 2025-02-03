@@ -1,6 +1,8 @@
 import { getServerCookie } from "@/helper/server.cookie";
 import { Train } from "../../types";
 import { axiosInstance } from "@/helper/api";
+import Gerbong from "./Gerbong";
+import Addgerbong from "./Addgerbong";
 
 const getDetailKereta = async (
     id: string
@@ -46,7 +48,7 @@ const DetailsKereta = async (
                     <div className="bg-yellow-100 rounded-md p-3">
                         <h1 className="text-lg font-semibold">Informasi</h1>
                         <p className="text-sm text-slate-500">
-                            Data kereta tidka ditermukan
+                            Data kereta tidak ditermukan
                         </p>
                     </div>
                 ) : (
@@ -55,6 +57,19 @@ const DetailsKereta = async (
                         <p className="text-sm">
                             {data.descriptions}
                         </p>
+                        <h2 className="text-base font-medium">
+                            Daftar Gerbong
+                        </h2>
+
+                        <Addgerbong id={data.id}/>
+
+                        <div className="my-5">
+                            {
+                                data.wagons.map((gerbong,index) => (
+                                    <Gerbong item={gerbong} key={`Gerbong-${index}`}/>
+                                ))
+                            }
+                        </div>
                     </div>
                 )
             }
