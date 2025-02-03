@@ -27,11 +27,11 @@ const Gerbong = (myProps: props) => {
                <div className="bg-sky-200 p-5 rounded-md">
               Gerbong ini belum mempunyai kursi
             </div>
-            <Addseat wagonId={myProps.item.id}/>
+            <Addseat wagonId={myProps.item.id} id={myProps.item.id}/>
             </div>
             :
             <div className="flex flex-wrap gap-3">
-               <Addseat wagonId={myProps.item.id}/>
+               <Addseat wagonId={myProps.item.id} id={myProps.item.id}/>
               {
                 myProps.item.seats.map((seat, index) => (
                   <Seat key={`seat-${index}`}
