@@ -11,15 +11,71 @@ interface props {
     kursi: seat;
 }
 
-const EditSeat = () => {
+const EditSeat = (myProps: props) => {
     const [seat_number, setSeatNumber] = useState<string>("");
+    const [show, setShow] = useState<boolean>(false);
+    const router = useRouter();
+
+    const openModal = () => {
+        setSeatNumber(myProps.kursi.seat_number);
+        setShow(true);
+    };
+
+    const closeModal = () => setShow(false);
+
+    const handleSubmit = async (e: FormEvent) => {
+        try {
+          e.preventDefault();
+    
+          const cookie = getStoresCookie("token");
+          const request = {
+            seat_number
+          };
+    
+          const response: any = await axiosInstance.put(
+            `/train/wagon/seat/${myProps.kursi.id}`,
+            request,
+            {
+              headers: {
+                Authorization: `Bearer ${cookie}`,
+              },
+            }
+          );
+    
+          const message = response.data.message;
+    
+          if (response.data.success != true) {
+            toast(message, {
+              type: "warning",
+              containerId: `toastEdit-${myProps.kursi.id}`,
+            });
+          }
+    
+          toast(message, {
+            type: "success",
+            containerId: `toastEdit-${myProps.kursi.id}`,
+          });
+          setShow(false);
+          setTimeout(() => router.refresh(), 1000);
+        } catch (error) {
+          console.log(error);
+          toast(
+            `Something went wrong`,
+    
+            {
+              toastId: `toastEdit-${myProps.kursi.id}`,
+              type: "error",
+            }
+          );
+        }
+      };
 
     return (
     <div>
-      <ToastContainer />
+      <ToastContainer containerId={`toastEdit-${myProps.kursi.id}`} />
       <button
         type="button"
-        className="px-1 py-1 bg-sky-600 hover:bg-sky-500 duration-200 text-white rounded-full"
+        className="px-1 py-1 bg-yellow-500 hover:bg-yellow-400 duration-200 text-black rounded-full"
         onClick={() => openModal()}
       >
         <svg
@@ -28,7 +84,7 @@ const EditSeat = () => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="size-6"
+          className="size-5"
         >
           <path
             strokeLinecap="round"
@@ -37,6 +93,48 @@ const EditSeat = () => {
           />
         </svg>
       </button>
+      <Modal isShow={show}>
+      <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="w-full p-3 rounded-t-md">
+            <h1 className="font-semibold text-lg text-black">Edit Gerbong</h1>
+            <span className="text-sm text-slate-500">
+              Pastikan data terisi dengan benar
+            </span>
+          </div>
+
+          <div className="w-full p-3">
+            <div className="my-2 border rounded-md p-3">
+              <small className="text-sm font-semibold text-sky-600">
+                Nama Kursi
+              </small>
+              <input
+                type="text"
+                id={`seat_number`}
+                value={seat_number}
+                onChange={(e) => setSeatNumber(e.target.value)}
+                required={true}
+                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
+              />
+            </div>
+          </div>
+
+          <div className="w-full p-3 rounded-b-lg flex items-center justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => closeModal()}
+              className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-md"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white rounded-md"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };
