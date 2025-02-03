@@ -8,6 +8,7 @@ import { toast, ToastContainer } from 'react-toastify'
 
 interface props {
   wagonId: number
+  id: number
 }
 
 const Addseat = (myprops: props) => {
@@ -34,7 +35,7 @@ const Addseat = (myprops: props) => {
 
       if (response.data.success === false) {
         toast(response.data.message, {
-          containerId: "toastAddSeat",
+          containerId: `toastAddSeat-${myprops.id}`,
           type: "warning",
         })
         setSeatNumber("")
@@ -43,7 +44,7 @@ const Addseat = (myprops: props) => {
 
       setShow(false)
       toast('Gerbong Kereta Berhasil Ditambahkan', {
-        containerId: "toastAddSeat",
+        containerId: `toastAddSeat-${myprops.id}`,
         type: "success",
       })
       setSeatNumber("")
@@ -52,7 +53,7 @@ const Addseat = (myprops: props) => {
     } catch (error) {
       console.log(error)
       toast('Something Went Wrong', {
-        containerId: "toastAddSeat",
+        containerId: `toastAddSeat-${myprops.id}`,
         type: "error",
       })
     }
@@ -60,7 +61,7 @@ const Addseat = (myprops: props) => {
 
   return (
     <>
-    <ToastContainer containerId={`toastAddSeat`}/>
+    <ToastContainer containerId={`toastAddSeat-${myprops.id}`}/>
     <button className='size-20 rounded-sm flex items-center justify-center bg-green-700 text-white font-bold text-2xl cursor-pointer'
     onClick={() => setShow(true)}
     >

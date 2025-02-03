@@ -1,6 +1,5 @@
 "use client"
 import { useState } from "react";
-import { wagon } from "../../types";
 import { useRouter } from "next/navigation";
 import { getStoresCookie } from "@/helper/client.cookkie";
 import { axiosInstance } from "@/helper/api";
@@ -45,16 +44,16 @@ const Editseat = (myprops: props) => {
     if (!response.data.success) {
       toast(message, {
                 type:'warning',
-                containerId: `toastEdit-${myprops.seatId}`
+                containerId: `toastEdit-${myprops.seatId}`,
       })
     }
 
+    setShow(false)
     toast(message, {
       type:'success',
       containerId: `toastEdit-${myprops.seatId}`
     })
-
-   setShow(false)
+    
    setTimeout(() => router.refresh(), 1000)
     } catch (error) {
       console.log(error)
