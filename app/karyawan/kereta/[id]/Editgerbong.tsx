@@ -1,14 +1,80 @@
-import React from "react";
+"use client"
+import { useState } from "react";
 import { wagon } from "../../types";
+import { useRouter } from "next/navigation";
+import { getStoresCookie } from "@/helper/client.cookkie";
+import { axiosInstance } from "@/helper/api";
+import { toast, ToastContainer } from "react-toastify";
+import Modal from "@/components/modal";
 
 interface props {
     item: wagon
 }
 
 const Editgerbong = (myprops: props) => {
+  const [name, setName] = useState<string>(myprops.item.name)
+  const [seatCount, setSeatCount] = useState<number>(myprops.item.seat_count)
+  const [show, setShow] = useState<boolean>(false)
+  const router = useRouter()
+
+  const openModal = () => {
+    setName(myprops.item.name)
+    setSeatCount(myprops.item.seat_count)
+    setShow(true)
+  }
+
+  const closeModal = () => {
+    setShow(false)
+    setName(myprops.item.name)
+    setSeatCount(myprops.item.seat_count)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault() // Pindahkan ke awal agar tidak ada event default yang berjalan
+    try {
+      const  cookie = getStoresCookie('token')
+      const response: any = await axiosInstance.put(`/train/wagon/${myprops.item.id}`, {
+        name,
+        seat_count: seatCount
+      }, {
+        headers: {
+          Authorization: `Bearer ${cookie}`,
+        }
+      }
+    )
+
+    const message = response.data.message
+
+    if (!response.data.success) {
+      toast(message, {
+                type:'warning',
+                containerId: `toastEdit-${myprops.item.id}`
+      })
+    }
+
+    toast(message, {
+      type:'success',
+      containerId: `toastEdit-${myprops.item.id}`
+    })
+
+   setShow(false)
+   setTimeout(() => router.refresh(), 1000)
+    } catch (error) {
+      console.log(error)
+      toast(
+        `Something went wrong`,
+
+        {
+          toastId: `toastEdit-${myprops.item.id}`,
+          type: 'error',
+        }
+      )  
+    }
+  }
   return (
     <div>
-      <button type="button"
+      <ToastContainer containerId={`toastEdit-${myprops.item.id}`}/>
+      <button type="button" onClick={() => openModal()}
       className="px-2 py-1 bg-sky-600 hover:bg-sky-500 rounded-md text-white"
       >
         <svg
@@ -26,6 +92,51 @@ const Editgerbong = (myprops: props) => {
           />
         </svg>
       </button>
+      <Modal isShow={show}>
+      <form onSubmit={(e) => handleSubmit(e)}>
+            <div className="w-full p-3 rounded-t-md">
+              <h1 className="font-semibold text-lg text-black">Tambah Kereta</h1>
+              <span className="text-sm text-slate-500">
+                Pastikan data terisi dengan benar
+              </span>
+            </div>
+            
+            <div className="w-full p-3">
+              <div className="my-2 border rounded-md p-3">
+                <small className="text-sm font-semibold text-sky-600">
+                  Nama Gerbong
+                </small>
+                <input type="text" id={`name-${myprops.item.id}`} 
+                value={name} 
+                onChange={(e) => setName(e.target.value)}
+                required 
+                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black" 
+                />
+              </div>
+              <div className="my-2 border rounded-md p-3">
+                <small className="text-sm font-semibold text-sky-600">
+                 Jumlah Kursi
+                </small>
+                <input type="text"  id={`seat-${myprops.item.id}`}
+                value={seatCount.toString()} 
+                onChange={(e) => setSeatCount(Number(e.target.value))}
+                required 
+                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
+                />
+              </div>
+            </div>
+
+            <div className="w-full p-3 rounded-b-lg flex items-center justify-end gap-2">
+             <button type="button" onClick={() => closeModal()}
+              className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-md"
+              >Close</button>
+             <button type="submit"
+              className="px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white rounded-md"
+              >Submit</button>
+            </div>
+
+          </form>
+      </Modal>
     </div>
   );
 };

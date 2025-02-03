@@ -62,7 +62,7 @@ const DeleteKereta = ({ keretaId }: Props) => {
 
     return (
       <div>
-        <ToastContainer />
+        <ToastContainer containerId={`toastDelete-${keretaId}`} />
         <button 
           type="button" 
           className="px-2 py-1 rounded-md bg-red-600 hover:bg-red-500 text-white"
