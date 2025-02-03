@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"; // Pastikan import CSS ini ada!
+import { FaRegTrashCan } from "react-icons/fa6";
 
 type Props = {
     keretaId: number
