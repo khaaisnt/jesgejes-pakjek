@@ -1,55 +1,57 @@
-'use client'
-import { axiosInstance } from '@/helper/api'
-import { storesCookie } from '@/helper/client.cookkie'
-import { useRouter } from 'next/navigation'
-import React, { FormEvent, useState } from 'react'
-import { toast, ToastContainer } from 'react-toastify'
+"use client";
+import { axiosInstance } from "@/helper/api";
+import { storesCookie } from "@/helper/client.cookie";
+import { useRouter } from "next/navigation";
+import React, { FormEvent, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
-  const router = useRouter()
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
-     try {
-      e.preventDefault()
+    try {
+      e.preventDefault();
 
-      const response: any = await axiosInstance.post('/auth', {
+      const response: any = await axiosInstance.post("/auth", {
         username,
-        password
-      })
+        password,
+      });
 
       if (response.data.success === false) {
-       return toast(response.data.message, {
-          type: 'warning',
-          containerId: 'toastLogin'
-        })
+        return toast(response.data.message, {
+          type: "warning",
+          containerId: "toastLogin",
+        });
       }
 
-      storesCookie('token', response.data.token)
+      storesCookie("token", response.data.token);
 
       toast(response.data.message, {
-        containerId: 'toastLogin',
-        type:'success',
-      })
+        containerId: "toastLogin",
+        type: "success",
+      });
 
-      if (response.data.role === 'ADMIN') {
-        setTimeout(() => router.replace('/karyawan/kereta'), 1000)
+      if (response.data.role === "ADMIN") {
+        setTimeout(() => router.replace("/karyawan/kereta"), 1000);
       }
-
-     } catch (error) {
-      console.log(error)
-      toast('some thing went wrong', {
-        containerId: 'toastLogin',
-        type: 'error',
-      })
-     }
-  }
+    } catch (error) {
+      console.log(error);
+      toast("some thing went wrong", {
+        containerId: "toastLogin",
+        type: "error",
+      });
+    }
+  };
 
   return (
-     <div className="w-dvw h-dvh flex justify-center items-center">
+    <div className="w-dvw h-dvh flex justify-center items-center">
       <ToastContainer containerId={`toastLogin`} />
-      <form className="w-5/6 md:w-1/2 border rounded-lg bg-white shadow-sm" onSubmit={e => handleSubmit(e)}>
+      <form
+        className="w-5/6 md:w-1/2 border rounded-lg bg-white shadow-sm"
+        onSubmit={(e) => handleSubmit(e)}
+      >
         {/* header login */}
         <div className="w-full bg-blue-600 rounded-t-lg text-white p-3">
           <h1 className="text-xl bg-blue-600 font-semibold">Login KAI</h1>
@@ -64,7 +66,7 @@ const LoginPage = () => {
               type="text"
               id={`username`}
               value={username}
-              placeholder='masukkan username'
+              placeholder="masukkan username"
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
@@ -76,7 +78,7 @@ const LoginPage = () => {
               type="password"
               id={`password`}
               value={password}
-              placeholder='masukkan password'
+              placeholder="masukkan password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
@@ -90,7 +92,7 @@ const LoginPage = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { cookies } from "next/headers"
 
 export const getServerCookie = async (
     key: string

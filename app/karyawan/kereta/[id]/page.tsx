@@ -37,9 +37,9 @@ const DetailsKereta = async (
     myprops: props
 ) => {
 
-    const id = myprops.params.id
+    const id_kereta = myprops.params.id
 
-    const data = await getDetailKereta(id)
+    const data = await getDetailKereta(id_kereta)
 
     return (
         <div className="w-full p-3">
@@ -61,7 +61,7 @@ const DetailsKereta = async (
                             Daftar Gerbong
                         </h2>
 
-                        <AddGerbong />
+                        <AddGerbong id_kereta={Number(id_kereta)} />
 
                         <div className="my-5">
                             {
