@@ -34,8 +34,8 @@ const Gerbong = (myProps: props) => {
                 </div>
             </div>
             <div className="p-3 flex gap-2">
-                <EditGerbong item={myProps.item} />
-                <DeleteGerbong item={myProps.item} />
+                <EditGerbong gerbong={myProps.item} />
+                <DeleteGerbong gerbongId={myProps.item.id} />
             </div>
         </div>
     )

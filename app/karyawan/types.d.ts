@@ -9,7 +9,7 @@ export interface Train {
     wagons: wagon[]
   }
 
-interface wagon {
+export interface wagon {
     id: number
     name: string
     train_id: number
@@ -19,7 +19,7 @@ interface wagon {
     seats: seat[]
 }
 
-interface seat {
+export interface seat {
   id: number
   seat_number: string
   wagon_id: number

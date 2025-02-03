@@ -1,13 +1,71 @@
-import { wagon } from "../../types";
+"use client";
+
+import Modal from "@/components/modal";
+import { axiosInstance } from "@/helper/api";
+import { getStoresCookie } from "@/helper/client.cookie";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type props = {
-    item: wagon
+  gerbongId: number;
 }
 
-const DeleteGerbong = (myProps: props) => {
+const DeleteGerbong = ({gerbongId}: props) => {
+  const [show, setShow] = useState<boolean>(false);
+  const router = useRouter();
+
+  const openModal = () => setShow(true);
+  const closeModal = () => setShow(false);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const cookie = getStoresCookie("token");
+
+      const response: any = await axiosInstance.delete(`/train/wagon/${gerbongId}`, {
+        headers: { Authorization: `Bearer ${cookie}` },
+      });
+
+      const message = response.data.message;
+
+      if (!response.data.success) {
+        toast.warning(message, {
+          toastId: `toastDelete-${gerbongId}`,
+          position: "top-right",
+          autoClose: 2000,
+        });
+        return;
+      }
+
+      toast.success(message, {
+        toastId: `toastDelete-${gerbongId}`,
+        position: "top-right",
+        autoClose: 3000,
+      });
+
+      setShow(false);
+      setTimeout(() => router.refresh(), 1000);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong", {
+        toastId: `toastDelete-${gerbongId}`,
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
+  };
+
   return (
     <div>
-      <button type="button" className="px-2 py-1 bg-red-600 hover:bg-red-500 duration-200 text-white rounded-md">
+      <ToastContainer />
+      <button 
+      type="button" 
+      className="px-2 py-1 bg-red-600 hover:bg-red-500 duration-200 text-white rounded-md"
+      onClick={openModal}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -23,6 +81,28 @@ const DeleteGerbong = (myProps: props) => {
           />
         </svg>
       </button>
+      <Modal isShow={show}>
+      <div className="w-full p-3">
+          <h1 className="font-semibold text-lg text-black">Hapus Gerbong</h1>
+          <span className="text-sm text-slate-500">
+            Apakah anda yakin ingin menghapus gerbong ini?
+          </span>
+          <div className="flex justify-end mt-4 gap-3">
+            <button
+              onClick={closeModal}
+              className="px-2 py-1 rounded-md text-white bg-gray-400 hover:bg-gray-500"
+            >
+              Batal
+            </button>
+            <button
+              onClick={handleSubmit}
+              className="px-2 py-1 rounded-md bg-red-600 hover:bg-red-500 text-white"
+            >
+              Hapus
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

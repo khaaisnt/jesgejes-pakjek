@@ -1,19 +1,19 @@
 "use client";
 import Modal from "@/components/modal";
 import { axiosInstance } from "@/helper/api";
-import { getServerCookie } from "@/helper/server.cookie";
+import { getStoresCookie } from "@/helper/client.cookie";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
-type props = {
-  id_kereta: number;
-};
+interface props {
+  id: number;
+}
 
-const AddGerbong = (myProps: props) => {
+const AddGerbong = (myprops: props) => {
   const [name, setName] = useState<string>("");
   const [seat_count, setSeatCount] = useState<number>(0);
-  const [train_id, setTrainId] = useState<number>(0);
+  const [train_id, setTrainId] = useState<number | null>(null);
   const [show, setShow] = useState<boolean>(false);
   const router = useRouter();
 
@@ -21,63 +21,75 @@ const AddGerbong = (myProps: props) => {
     setShow(true);
     setName("");
     setSeatCount(0);
-    setTrainId(myProps.id_kereta);
+    setTrainId(myprops.id);
+    setShow(true);
   };
 
-  const closeModal = () => {
-    setShow(false);
+  const closeModal = () => setShow(false);
+
+  const handleReset = () => {
+    setName("");
+    setSeatCount(0);
+    setTrainId(myprops.id);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
-      const token = await getServerCookie("token");
-      const url = "/train/wagon";
-      const requestData = {
-        name,
-        seat_count,
-        train_id,
-      };
-      const response: any = await axiosInstance.post(url, requestData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const cookie = getStoresCookie("token");
+
+      const response: any = await axiosInstance.post(
+        "/train/wagon",
+        {
+          name,
+          seat_count,
+          train_id: Number(train_id)
         },
-      });
-      const message = response.data.message;
+        {
+          headers: {
+            Authorization: `Bearer ${cookie}`,
+          },
+        }
+      );
+
       if (response.data.success === false) {
         setShow(false);
-        toast(message, {
-          containerId: "toastAddGerbong",
-          type: "success",
-        });
-        setTimeout(() => {
-          router.refresh();
-        }, 1000);
-      } else {
-        toast(message, {
+        toast(`${response.data.message}`, {
           containerId: "toastAddGerbong",
           type: "warning",
         });
+        handleReset();
+      } else {
+        setShow(false);
+        toast(`${response.data.message}`, {
+          containerId: "toastAddGerbong",
+          type: "success",
+        });
+        handleReset();
+        setTimeout(() => router.refresh(), 1000);
       }
     } catch (error) {
       console.log(error);
-      toast(`Something went wrong`, {
+      toast("Something went wrong", {
         containerId: "toastAddGerbong",
         type: "error",
       });
     }
   };
-
   return (
     <div>
-      <ToastContainer containerId={"toastAddGerbong"} />
-      <button className="btn-purple" type="button">
-        Tambah Gerbong
+      <ToastContainer containerId={`toastAddGerbong`} />
+      <button
+        type="button"
+        className="px-4 py-2 rounded-md bg-green-600 hover:bg-green-500 text-white"
+        onClick={() => openModal()}
+      >
+        Tambah Gerbong Kereta
       </button>
       <Modal isShow={show}>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="w-full p-3 rounded-t-md">
-            <h1 className="font-semibold text-lg text-black">Tambah Kereta</h1>
+            <h1 className="font-semibold text-lg text-black">Tambah Gerbong</h1>
             <span className="text-sm text-slate-500">
               Pastikan data terisi dengan benar
             </span>
@@ -86,7 +98,7 @@ const AddGerbong = (myProps: props) => {
           <div className="w-full p-3">
             <div className="my-2 border rounded-md p-3">
               <small className="text-sm font-semibold text-sky-600">
-                Nama Kereta
+                Nama Gerbong
               </small>
               <input
                 type="text"
@@ -99,27 +111,14 @@ const AddGerbong = (myProps: props) => {
             </div>
             <div className="my-2 border rounded-md p-3">
               <small className="text-sm font-semibold text-sky-600">
-                Deskripsi Kereta
+                Jumlah Kursi
               </small>
               <input
-                type="text"
-                id="descriptions"
-                value={descriptions}
-                onChange={(e) => setDescriptions(e.target.value)}
-                required
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-              />
-            </div>
-            <div className="my-2 border rounded-md p-3">
-              <small className="text-sm font-semibold text-sky-600">
-                Tipe Kereta
-              </small>
-              <input
-                type="text"
-                id="type"
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-                required
+                type="number"
+                id={`seat_count`}
+                value={seat_count.toString()}
+                onChange={(e) => setSeatCount(e.target.value)}
+                required={true}
                 className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
               />
             </div>

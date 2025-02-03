@@ -6,7 +6,7 @@ import { getStoresCookie } from "@/helper/client.cookie";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Pastikan import CSS ini ada!
+import "react-toastify/dist/ReactToastify.css";
 
 type Props = {
   keretaId: number;
@@ -20,7 +20,7 @@ const DeleteKereta = ({ keretaId }: Props) => {
   const closeModal = () => setShow(false);
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault(); // Pindahkan ke awal agar tidak ada event default yang berjalan
+    e.preventDefault();
 
     try {
       const cookie = getStoresCookie("token");
