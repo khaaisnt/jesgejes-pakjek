@@ -27,7 +27,7 @@ const AddSeat = (myProps: props) => {
   const closeModal = () => setShow(false);
 
   const handleReset = () => {
-    setSeatNumber(0);
+    setSeatNumber("");
     setWagonId(myProps.id);
   };
 

@@ -1,4 +1,5 @@
 import { seat } from "../../types";
+import DeleteSeat from "./deleteSeat";
 import EditSeat from "./editSeat";
 
 type props = {
@@ -11,8 +12,9 @@ const Seat = (myProps: props) => {
       <span className="text-white font-semibold">
         {myProps.item.seat_number}
       </span>
-      <div>
+      <div className="flex gap-1 mt-1">
         <EditSeat kursi={myProps.item} />
+        <DeleteSeat kursiId={myProps.item.id} />
       </div>
     </div>
   );
