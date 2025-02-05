@@ -6,8 +6,6 @@ import { getStoresCookie } from "@/helper/client.cookkie"
 import { useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"; // Pastikan import CSS ini ada!
-import { FaRegTrashCan } from "react-icons/fa6";
 
 type Props = {
     keretaId: number
@@ -21,7 +19,7 @@ const DeleteKereta = ({ keretaId }: Props) => {
     const closeModal = () => setShow(false)
 
     const handleSubmit = async (e: FormEvent) => {
-      e.preventDefault() // Pindahkan ke awal agar tidak ada event default yang berjalan
+      e.preventDefault() 
       
       try {
         const cookie = getStoresCookie('token')
@@ -34,28 +32,27 @@ const DeleteKereta = ({ keretaId }: Props) => {
 
         if (!response.data.success) {
           toast.warning(message, {
-            toastId: `toastDelete-${keretaId}`,
-            position: "top-right",
-            autoClose: 3000
+            containerId: `toastDelete-${keretaId}`,
+            type: "warning"
           });
           return;
         }
 
         toast.success(message, {
-          toastId: `toastDelete-${keretaId}`,
-          position: "top-right",
-          autoClose: 3000
+          containerId: `toastDelete-${keretaId}`,
+          type: "success"
         });
 
-        setShow(false)
-        setTimeout(() => router.refresh(), 1000)
+       
+        setTimeout(() => {
+          setShow(false)
+          router.refresh()}, 1000)
 
       } catch (error) {
         console.error(error);
         toast.error("Something went wrong", {
-          toastId: `toastDelete-${keretaId}`,
-          position: "top-right",
-          autoClose: 3000
+          containerId: `toastDelete-${keretaId}`,
+          type: "error"
         });
       }
     }
@@ -64,7 +61,6 @@ const DeleteKereta = ({ keretaId }: Props) => {
       <div>
         <ToastContainer containerId={`toastDelete-${keretaId}`} />
         <button 
-          type="button" 
           className="px-2 py-1 rounded-md bg-red-600 hover:bg-red-500 text-white"
           onClick={openModal}
         >
