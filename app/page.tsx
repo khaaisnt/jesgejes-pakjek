@@ -46,10 +46,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-dvw h-dvh flex justify-center items-center">
+    <div className="w-dvw h-dvh bg-gradient-to-br from-pink-400 to bg-purple-700 flex justify-center items-center">
       <ToastContainer containerId={`toastLogin`} />
       <form
-        className="w-5/6 md:w-1/2 border rounded-lg bg-white shadow-sm"
+        className="w-5/6 md:w-1/3 rounded-lg bg-white shadow-md"
         onSubmit={(e) => handleSubmit(e)}
       >
         {/* header login */}
@@ -59,9 +59,9 @@ const LoginPage = () => {
         {/* login body */}
         <div className="w-full p-5">
           <div className="mb-3">
-            <span className="text-sm text-blue-600">Username</span>
+            <span className="text-sm font-medium text-blue-600">Username</span>
             <input
-              className="w-full p-2 border rounded-md"
+              className="w-full p-2 bg-slate-50 border rounded-md"
               required={true}
               type="text"
               id={`username`}
@@ -71,9 +71,9 @@ const LoginPage = () => {
             />
           </div>
           <div className="mb-3">
-            <span className="text-sm text-blue-600">Password</span>
+            <span className="text-sm font-medium text-blue-600">Password</span>
             <input
-              className="w-full p-2 border rounded-md"
+              className="w-full p-2 bg-slate-50 border rounded-md"
               required={true}
               type="password"
               id={`password`}
@@ -81,11 +81,12 @@ const LoginPage = () => {
               placeholder="masukkan password"
               onChange={(e) => setPassword(e.target.value)}
             />
+            <span className="hover:underline duration-200 text-end flex justify-end mt-2 cursor-pointer">forgot password?</span>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-br from-purple-700 to-purple-500 hover:bg-gradient-to-tl duration-200 text-white px-4 py-2 rounded-md"
+            className="w-full font-medium bg-gradient-to-br from-purple-700 to-purple-500 hover:bg-gradient-to-tl duration-200 text-white px-4 py-2 rounded-md"
           >
             Login
           </button>

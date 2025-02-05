@@ -49,6 +49,7 @@ export interface Customer {
   role: string
   createdAt: string
   updatedAt: string
+  user_details: UserDetails
 }
 
 interface UserDetails {
