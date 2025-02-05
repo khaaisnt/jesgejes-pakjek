@@ -26,3 +26,26 @@ interface seat {
   createdAt: string
   updatedAt: string
 }
+
+interface User {
+  id: number;
+  nik: string;
+  name: string;
+  address: string;
+  phone: string;
+  user_id: number;
+  app_user_token: string;
+  createdAt: string;
+  updatedAt: string;
+  user_details: user_details
+}
+
+interface user_details {
+  id: number;
+  username: string;
+  password: string;
+  role: string;
+  app_user_token: string;
+  createdAt: string; 
+  updatedAt: string;
+}

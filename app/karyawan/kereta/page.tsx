@@ -8,8 +8,6 @@ const getAllTrain = async (): Promise<Train[]> => {
         try {
             const token = await getServerCookie('token')
 
-            console.log(token)
-
             const response: any = await axiosInstance.get('/train', {
                 headers: {
                     Authorization: `Bearer ${token}`,

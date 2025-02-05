@@ -65,7 +65,7 @@ const AddKereta = () => {
         `Something went wrong`,
 
         {
-          toastId: 'toastAdd',
+          containerId: 'toastAdd',
           type: 'error',
         }
       )      
