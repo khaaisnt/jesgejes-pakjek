@@ -15,7 +15,6 @@ type Props = {
 const DeleteKereta = ({ keretaId }: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const router = useRouter();
-
   const openModal = () => setShow(true);
   const closeModal = () => setShow(false);
 
