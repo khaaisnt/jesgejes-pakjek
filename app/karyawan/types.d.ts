@@ -28,18 +28,17 @@ export interface Seat {
 }
 
 export interface Employee {
-  id: number
-  nik: number
-  name: string
-  username: string
-  address: string
-  phone: number
-  role: string
-  app_user_token: string
-  createdAt: string
-  updatedAt: string
+  id: number;
+  nik: string;
+  name: string;
+  address: string;
+  phone: string;
+  user_id: number;
+  app_user_token: string;
+  createdAt: string;
+  updatedAt: string;
+  user_details: UserDetails;
 }
-
 
 export interface Customer {
   id: number
@@ -50,4 +49,14 @@ export interface Customer {
   role: string
   createdAt: string
   updatedAt: string
+}
+
+interface UserDetails {
+  id: number;
+  username: string;
+  password: string;
+  role: string;
+  app_user_token: string;
+  createdAt: string; 
+  updatedAt: string;
 }

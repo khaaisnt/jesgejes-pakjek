@@ -70,10 +70,9 @@ const EditKereta = (myprops: props) => {
       console.log(error);
       toast(
         `Something went wrong`,
-
         {
           toastId: `toastEdit-${myprops.kereta.id}`,
-          type: "error",
+          type: "error"
         }
       );
     }
