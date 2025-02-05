@@ -3,46 +3,47 @@ import { Customer } from "../types";
 import { axiosInstance } from "@/helper/api";
 import CustomerData from "./Pelanggan";
 import AddCustomer from "./AddPelanggan";
+import Sidebar from "@/components/sidebar";
 
 const getAllCustomer = async (): Promise<Customer[]> => {
-    try {
-        const token = await getServerCookie('token')
-        console.log(token)
+  try {
+    const token = await getServerCookie("token");
+    console.log(token);
 
-        const response: any = await axiosInstance.get('/customer', {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
+    const response: any = await axiosInstance.get("/customer", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-        if(response.data.success == true) {
-            return response.data.data
-        }
-        return []
-
-    } catch (error) {
-        console.log(error);
-        return [];
+    if (response.data.success == true) {
+      return response.data.data;
     }
-}
+    return [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
 
 const customerPage = async () => {
-    const dataCustomer = await getAllCustomer();
+  const dataCustomer = await getAllCustomer();
 
-    return (
-        <div className="w-full p-5 bg-white h-screen">
-            <h1 className="text-2xl font-bold text-black">Data Karyawan</h1>
-            <span>Halaman ini memuat data karyawan SekopTix</span>
-            <div className="my-3">
-                <AddCustomer/>
-                {
-                    dataCustomer.map((customer, index) => (
-                        <CustomerData item={customer} key={`customer-${index}`} />
-                    ))
-                }
-            </div>
+  return (
+    <div className="flex">
+      <Sidebar />
+      <div className="w-full relative container p-5 bg-white h-screen">
+        <h1 className="text-2xl font-bold text-black">Data Pelanggan</h1>
+        <span>Halaman ini memuat data karyawan SekopTix</span>
+        <div className="my-3">
+          <AddCustomer />
+          {dataCustomer.map((customer, index) => (
+            <CustomerData item={customer} key={`customer-${index}`} />
+          ))}
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default customerPage
+export default customerPage;

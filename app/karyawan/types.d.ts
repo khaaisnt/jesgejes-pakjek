@@ -42,10 +42,10 @@ export interface Employee {
 
 export interface Customer {
   id: number
-  nik: number
+  nik: string
   name: string
   address: string
-  phone: number
+  phone: string
   role: string
   createdAt: string
   updatedAt: string
