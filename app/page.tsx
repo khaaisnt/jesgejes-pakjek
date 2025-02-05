@@ -54,7 +54,7 @@ const LoginPage = () => {
       >
         {/* header login */}
         <div className="w-full bg-blue-600 rounded-t-lg text-white p-3">
-          <h1 className="text-xl bg-blue-600 font-semibold">Login KAI</h1>
+          <h1 className="text-xl text-center bg-blue-600 font-semibold">Login SekopTix</h1>
         </div>
         {/* login body */}
         <div className="w-full p-5">

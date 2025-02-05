@@ -9,7 +9,7 @@ export interface Train {
     wagons: wagon[]
   }
 
-export interface wagon {
+export interface Wagon {
     id: number
     name: string
     train_id: number
@@ -19,10 +19,35 @@ export interface wagon {
     seats: seat[]
 }
 
-export interface seat {
+export interface Seat {
   id: number
   seat_number: string
   wagon_id: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface Employee {
+  id: number
+  nik: number
+  name: string
+  username: string
+  address: string
+  phone: number
+  role: string
+  app_user_token: string
+  createdAt: string
+  updatedAt: string
+}
+
+
+export interface Customer {
+  id: number
+  nik: number
+  name: string
+  address: string
+  phone: number
+  role: string
   createdAt: string
   updatedAt: string
 }

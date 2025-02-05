@@ -1,5 +1,5 @@
 "use client";
-import { wagon } from "@/app/karyawan/types";
+import { Wagon } from "@/app/karyawan/types";
 import Modal from "@/components/modal";
 import { axiosInstance } from "@/helper/api";
 import { getStoresCookie } from "@/helper/client.cookie";
@@ -8,7 +8,7 @@ import { FormEvent, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 type props = {
-    gerbong: wagon
+    gerbong: Wagon
 }
 
 const EditGerbong = (myProps: props) => {

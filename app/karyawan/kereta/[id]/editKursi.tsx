@@ -1,5 +1,5 @@
 "use client";
-import { seat } from "@/app/karyawan/types";
+import { Seat } from "@/app/karyawan/types";
 import Modal from "@/components/modal";
 import { axiosInstance } from "@/helper/api";
 import { getStoresCookie } from "@/helper/client.cookie";
@@ -8,7 +8,7 @@ import { FormEvent, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 interface props {
-    kursi: seat;
+    kursi: Seat;
 }
 
 const EditSeat = (myProps: props) => {

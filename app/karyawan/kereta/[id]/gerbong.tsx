@@ -1,11 +1,11 @@
-import { wagon } from "../../types";
+import { Wagon } from "../../types";
 import AddSeat from "./addSeat";
 import DeleteGerbong from "./deleteGerbong";
 import EditGerbong from "./editGerbong";
-import Seat from "./seat";
+import Seat from "./kursi";
 
 type props = {
-  item: wagon;
+  item: Wagon;
 };
 
 const Gerbong = (myProps: props) => {

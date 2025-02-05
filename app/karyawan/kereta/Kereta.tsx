@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import Link from "next/link";
 import { Train } from "../types"
@@ -6,7 +6,7 @@ import DeleteKereta from "./DeleteKereta";
 import EditKereta from "./EditKereta";
 
 interface props {
-    item: Train;  // Assuming Train is the type of data that this component expects to receive from the parent component  // assuming Train is the type of data that this component expects to receive from the parent component  // assuming Train is the type of data that this component expects to receive from the parent component  // assuming Train is the type of data that this component expects to receive from the parent component  // assuming Train is the type of data that this component expects to receive from the parent component  // assuming Train is the type of data that this component expects to receive from the parent component  // assuming Train is the type of data that this component expects to receive from the parent component  // assuming Train is the type of data that this component expects to receive from the parent component  // assuming Train is the type of data that this component expects to receive from the parent component  // assuming Train is the type of data that this component expects to receive from the parent component  // assuming Train
+    item: Train;
 }
 
 const TrainData = (

@@ -1,8 +1,8 @@
 import { getServerCookie } from "@/helper/server.cookie";
 import { Train } from "../types";
 import { axiosInstance } from "@/helper/api";
-import TrainData from "./Train";
-import AddKereta from "./addKereta";
+import TrainData from "./Kereta";
+import AddKereta from "./AddKereta";
 
 const getAllTrain = async (): Promise<Train[]> => {
         try {
@@ -27,7 +27,7 @@ const getAllTrain = async (): Promise<Train[]> => {
         }
 }
 
- const keretaPage = async () => {
+const keretaPage = async () => {
 
     const dataKereta = await getAllTrain();
 

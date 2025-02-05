@@ -3,7 +3,7 @@ import "./globals.css";
 import "react-toastify/ReactToastify.css"
 
 export const metadata: Metadata = {
-  title: "Tiket Kereta",
+  title: "SekopTix",
   description: "Sekopling Tiket Kereta",
 };
 

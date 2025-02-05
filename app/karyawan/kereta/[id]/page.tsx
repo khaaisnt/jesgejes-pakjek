@@ -1,7 +1,7 @@
 import { getServerCookie } from "@/helper/server.cookie";
 import { Train } from "../../types";
 import { axiosInstance } from "@/helper/api";
-import Gerbong from "./gerbong";
+import Gerbong from "./gerbong"
 import AddGerbong from "./addGerbong";
 
 const getDetailKereta = async (

@@ -1,9 +1,9 @@
-import { seat } from "../../types";
-import DeleteSeat from "./deleteSeat";
-import EditSeat from "./editSeat";
+import { Seat } from "../../types";
+import DeleteSeat from "./deleteKursi";
+import EditSeat from "./editKursi";
 
 type props = {
-  item: seat;
+  item: Seat;
 };
 
 const Seat = (myProps: props) => {
