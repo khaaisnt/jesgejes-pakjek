@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Employee } from "../types"
 import EditAdmin from "./EditAdmin"
 import DeleteAdmin from "./DeleteAdmin"
+import ForgotPasswordEmployee from "./ForgotPassword"
 
 interface props {
     item: Employee
@@ -43,6 +44,7 @@ const EmployeeData = (
                 <div className="flex gap-2 items-center">
                     <EditAdmin admin={item}/>
                     <DeleteAdmin adminId={item.id}/>
+                    <ForgotPasswordEmployee admin={item.id}/>  
                 </div>
             </div>
         </div>

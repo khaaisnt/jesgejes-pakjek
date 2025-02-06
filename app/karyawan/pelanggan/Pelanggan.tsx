@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Customer } from "../types"
 import DeleteCustomer from "./DeletePelanggan"
 import EditCustomer from "./EditPelanggan"
+import ForgotPasswordCustomer from "./ForgotPassword"
 
 interface props {
     item: Customer
@@ -59,6 +60,7 @@ const CustomerData = (
                 <div className="flex gap-2 items-center">
                     <EditCustomer customer={item}/>
                     <DeleteCustomer customerId={item.id}/>
+                    <ForgotPasswordCustomer customer={item}/>
                 </div>
             </div>
         </div>
