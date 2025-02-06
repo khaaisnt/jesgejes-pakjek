@@ -32,7 +32,7 @@ const keretaPage = async () => {
   const dataKereta = await getAllTrain();
 
   return (
-    <div className="flex">
+    <div className="md:flex">
       <Sidebar />
       <div className="w-full p-5 bg-white h-screen">
         <h1 className="text-2xl font-bold text-black">Data Kereta</h1>
