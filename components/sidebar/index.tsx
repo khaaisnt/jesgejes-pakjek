@@ -1,13 +1,26 @@
 "use client";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { removeCookie } from "@/helper/client.cookie";
 
-const Sidebar = () => {
+type props = {
+  children: ReactNode
+}
+
+const Sidebar = (myProps: props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  const router = useRouter();
+  
+  const handleLogout = () => {
+    removeCookie("token");
+    router.replace("/");
+  }
 
   return (
     <div>
@@ -46,6 +59,14 @@ const Sidebar = () => {
           >
             Admin
           </Link>
+          <div className="fles items-end h-full justify-end">
+            <button
+              onClick={handleLogout}
+              className="w-full py-2 px-2 bg-red-600 hover:bg-red-700 font-medium duration-200 rounded-md"
+            >
+              Logout
+            </button>
+          </div>
         </nav>
       </div>
     </div>

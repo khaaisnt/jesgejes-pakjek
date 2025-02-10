@@ -44,7 +44,7 @@ const EmployeeData = (
                 <div className="flex gap-2 items-center">
                     <EditAdmin admin={item}/>
                     <DeleteAdmin adminId={item.id}/>
-                    <ForgotPasswordEmployee admin={item.id}/>  
+                    <ForgotPasswordEmployee admin={item}/>  
                 </div>
             </div>
         </div>

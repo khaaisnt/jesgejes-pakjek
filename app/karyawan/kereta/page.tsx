@@ -2,7 +2,7 @@ import { getServerCookie } from "@/helper/server.cookie";
 import { Train } from "../types";
 import { axiosInstance } from "@/helper/api";
 import TrainData from "./Kereta";
-import AddKereta from "./AddKereta";
+import AddKereta from "./addKereta";
 import Sidebar from "@/components/sidebar";
 
 const getAllTrain = async (): Promise<Train[]> => {
