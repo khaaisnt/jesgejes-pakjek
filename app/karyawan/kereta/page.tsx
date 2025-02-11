@@ -3,7 +3,6 @@ import { Train } from "../types";
 import { axiosInstance } from "@/helper/api";
 import TrainData from "./Kereta";
 import AddKereta from "./addKereta";
-import Sidebar from "@/components/sidebar";
 
 const getAllTrain = async (): Promise<Train[]> => {
   try {
@@ -32,8 +31,6 @@ const keretaPage = async () => {
   const dataKereta = await getAllTrain();
 
   return (
-    <div className="md:flex">
-      <Sidebar />
       <div className="w-full p-5 bg-white h-screen">
         <h1 className="text-2xl font-bold text-black">Data Kereta</h1>
         <span className="text-base text-black">
@@ -46,7 +43,6 @@ const keretaPage = async () => {
           ))}
         </div>
       </div>
-    </div>
   );
 };
 

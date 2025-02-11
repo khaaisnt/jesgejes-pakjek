@@ -1,9 +1,9 @@
-import Sidebar from "@/components/sidebar";
 import type { Metadata } from "next";
 import "react-toastify/ReactToastify.css";
+import EmployeeTemplate from "@/components/EmployeeTemplate";
 
 export const metadata: Metadata = {
-  title: "SekopTix",
+  title: "Sekopling JesGejes",
   description: "Sekopling Tiket Kereta",
 };
 
@@ -13,10 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`antialiased`}>
-        {children}
-      </body>
-    </html>
+   <EmployeeTemplate>
+    {children}
+   </EmployeeTemplate>
   );
 }

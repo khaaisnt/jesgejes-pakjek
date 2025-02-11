@@ -13,12 +13,12 @@ type props = {
 };
 
 const EditCustomer = (myprops: props) => {
-  const [nik, setNik] = useState<string>("");
+  const [nik, setNik] = useState<string>(myprops.customer.nik);
   const [name, setName] = useState<string>(myprops.customer.name);
-  const [address, setAddress] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [address, setAddress] = useState<string>(myprops.customer.address);
+  const [phone, setPhone] = useState<string>(myprops.customer.phone);
+  const [username, setUsername] = useState<string>(myprops.customer.user_details.username);
+  const [password, setPassword] = useState<string>(myprops.customer.user_details.password);
   const [show, setShow] = useState<boolean>(false);
   const router = useRouter();
 

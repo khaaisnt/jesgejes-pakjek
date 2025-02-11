@@ -13,12 +13,12 @@ type props = {
 };
 
 const EditAdmin = (myprops: props) => {
-  const [nik, setNik] = useState<string>("");
+  const [nik, setNik] = useState<string>(myprops.admin.nik);
   const [name, setName] = useState<string>(myprops.admin.name);
-  const [address, setAddress] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [address, setAddress] = useState<string>(myprops.admin.address);
+  const [phone, setPhone] = useState<string>(myprops.admin.phone);
+  const [username, setUsername] = useState<string>(myprops.admin.user_details.username);
+  const [password, setPassword] = useState<string>(myprops.admin.user_details.password);
   const [show, setShow] = useState<boolean>(false);
   const router = useRouter();
 

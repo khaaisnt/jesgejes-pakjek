@@ -3,7 +3,6 @@ import { Customer } from "../types";
 import { axiosInstance } from "@/helper/api";
 import CustomerData from "./Pelanggan";
 import AddCustomer from "./AddPelanggan";
-import Sidebar from "@/components/sidebar";
 
 const getAllCustomer = async (): Promise<Customer[]> => {
   try {
@@ -30,9 +29,7 @@ const customerPage = async () => {
   const dataCustomer = await getAllCustomer();
 
   return (
-    <div className="md:flex">
-      <Sidebar />
-      <div className="w-full relative container p-5 bg-white h-screen" >
+      <div className="w-full p-5 bg-white h-screen">
         <h1 className="text-2xl font-bold text-black">Data Pelanggan</h1>
         <span>Halaman ini memuat data karyawan SekopTix</span>
         <div className="my-3">
@@ -42,7 +39,6 @@ const customerPage = async () => {
           ))}
         </div>
       </div>
-    </div>
   );
 };
 

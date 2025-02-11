@@ -30,8 +30,6 @@ const adminPage = async () => {
   const dataAdmin = await getAllAdmin();
 
   return (
-    <div className="md:flex">
-      <Sidebar />
       <div className="w-full p-5 bg-white h-screen">
         <h1 className="text-2xl font-bold text-black">Data Karyawan</h1>
         <span>Halaman ini memuat data karyawan SekopTix</span>
@@ -42,7 +40,6 @@ const adminPage = async () => {
           ))}
         </div>
       </div>
-    </div>
   );
 };
 
