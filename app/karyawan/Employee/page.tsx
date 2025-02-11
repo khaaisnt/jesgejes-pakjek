@@ -30,7 +30,7 @@ const page = async () => {
     console.log(employees)
 
   return (
-    <div className="w-full p-5 bg-white h-screen">
+    <div className="w-full p-5 bg-white">
             <h1 className="text-xl font-semibold text-black">Data Petugas</h1>
             <span className="text-sm text-black">
                 Halaman ini memuat data petugas

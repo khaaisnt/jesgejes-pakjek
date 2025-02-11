@@ -30,7 +30,7 @@ const getAllTrain = async (): Promise<Train[]> => {
     const dataKereta = await getAllTrain();
 
     return (
-        <div className="w-full p-5 bg-white h-screen">
+        <div className="w-full p-5 bg-white ">
             <h1 className="text-xl font-semibold text-black">Data Kereta</h1>
             <span className="text-sm text-black">
                 Halaman ini memuat data kereta api yang tersedia

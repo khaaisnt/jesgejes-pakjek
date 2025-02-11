@@ -10,8 +10,16 @@ interface props {
 }
 const Customer = (myprops: props) => {
   return (
-    <div className="w-full flex flex-wrap my-2 border border-black text-black rounded-md">
-    <div className="w-full flex flex-col  md:w-4/12 p-2">
+    <div className="w-full flex justify-between my-2 border border-black text-black rounded-md">
+    <div className="w-full flex flex-col md:w-4/12 p-2">
+        <small className="text-sm font-medium">
+           Nik
+        </small>
+        <span >
+           {myprops.item.nik}
+        </span>
+    </div>
+    <div className="w-full flex flex-col md:w-4/12 p-2">
         <small className="text-sm font-medium">
             Username
         </small>
@@ -24,6 +32,22 @@ const Customer = (myprops: props) => {
             Name
         </small>
         <span >{myprops.item.name}</span>
+    </div>
+    <div className="w-full flex flex-col md:w-4/12 p-2">
+        <small className="text-sm font-medium">
+            Phone
+        </small>
+        <span >
+           {myprops.item.phone}
+        </span>
+    </div>
+    <div className="w-full flex flex-col md:w-4/12 p-2">
+        <small className="text-sm font-medium">
+            Address
+        </small>
+        <span >
+           {myprops.item.address}
+        </span>
     </div>
     <div className="w-full flex flex-col  md:w-2/12 p-2">
         <small className="text-sm font-medium">
