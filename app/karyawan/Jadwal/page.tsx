@@ -1,10 +1,30 @@
 import React from 'react'
-import { ScheduleTypes } from '../types'
+import { ScheduleTypes, Train } from '../types'
 import { axiosInstance } from '@/helper/api'
 import { getServerCookie } from '@/helper/server.cookie'
 import Schedule from './Schedule'
 import AddSchedule from './AddSchedule'
 
+const getAllTrain = async (): Promise<Train[]> => {
+        try {
+            const token = await getServerCookie('token')
+
+            const response: any = await axiosInstance.get('/train', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+
+            if(response.data.success == true) {
+                return response.data.data
+            }
+
+            return []
+        } catch (error) {
+            console.log(error);
+            return []
+        }
+}
 
 const getJadwal = async (): Promise<ScheduleTypes[]> => {
     try {
@@ -30,6 +50,7 @@ const getJadwal = async (): Promise<ScheduleTypes[]> => {
 const JadwalPage = async () => {
 
     const listJadwal = await getJadwal()
+    const kereta = await getAllTrain()
 
   return (
     <div className="w-full p-5 bg-white">
@@ -38,10 +59,10 @@ const JadwalPage = async () => {
                 Halaman ini memuat data jadwal kereta
             </span>
             <div className="my-3">
-                <AddSchedule/>
+                <AddSchedule trains={kereta}/>
                 {
                     listJadwal.map((jadwal, index) => (
-                        <Schedule key={index} item={jadwal}/>
+                        <Schedule key={index} item={jadwal} trains={kereta}/>
                     ))
                 }
             </div>
