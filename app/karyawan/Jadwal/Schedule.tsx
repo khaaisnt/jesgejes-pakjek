@@ -1,8 +1,11 @@
 import React from 'react'
-import { ScheduleTypes } from '../types'
+import { ScheduleTypes, Train } from '../types'
+import EditSchedule from './EditJadwal'
+import DeleteSchedule from './DeleteSchedule'
 
 interface props {
     item: ScheduleTypes
+    trains: Train[]
 }
 
 const showTime = (date: string) => {
@@ -46,6 +49,11 @@ const Schedule = (myprops: props) => {
             style: 'currency',
             currency: 'IDR',
         })}</strong>
+        </div>
+
+        <div className='p-3 flex'>
+        <EditSchedule trains={myprops.trains} schedule={myprops.item}/>
+        <DeleteSchedule item={myprops.item}/>
         </div>
     </div>
   )

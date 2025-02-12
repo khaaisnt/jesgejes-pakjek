@@ -1,20 +1,25 @@
 'use client'
 
 import { useRouter } from "next/navigation"
-import { ScheduleTypes } from "../types"
 import { FormEvent, useState } from "react"
 import { axiosInstance } from "@/helper/api"
 import { getStoresCookie, storesCookie } from "@/helper/client.cookkie"
 import { toast, ToastContainer } from "react-toastify"
 import Modal from "@/components/modal"
+import DatePicker from "react-datepicker"
+import { Train } from "../types"
+import "react-datepicker/dist/react-datepicker.css"
 
-const AddSchedule = () => {
+interface props {
+  trains: Train[]
+}
+const AddSchedule = (myprops: props) => {
     const router = useRouter()
     const [show, setShow] = useState(false)
     const [from, setFrom] = useState<string>("")
     const [to, setTo] = useState<string>("")
-    const [departured_time, setDepatured_time] = useState<string>("")
-    const [arrived_time, setArived_time] = useState<string>("")
+    const [departured_time, setDepatured_time] = useState<Date>(new Date())
+    const [arrived_time, setArived_time] = useState<Date>(new Date())
     const [trainId, setTrainId] = useState<number>(0)
     const [price, setPrice] = useState<number>(0)
 
@@ -22,8 +27,8 @@ const AddSchedule = () => {
         setShow(true)
         setFrom("")
         setTo("")
-        setDepatured_time("")
-        setArived_time("")
+        setDepatured_time(new Date())
+        setArived_time(new Date())
         setTrainId(0)
         setPrice(0)
     }
@@ -37,7 +42,7 @@ const AddSchedule = () => {
             const response: any = await axiosInstance.post('/schedule', {
                 departured_location: from,
                 arrived_location: to,
-                departure_time: departured_time,
+                departured_time: departured_time,
                 arrived_time: arrived_time,
                 train_id: trainId,
                 price: price
@@ -110,34 +115,42 @@ const AddSchedule = () => {
                 <small className="text-sm font-semibold text-sky-600">
                  Departured Time
                 </small>
-                <input type="date" id="type" 
-                value={departured_time} 
-                onChange={(e) => setDepatured_time(e.target.value)}
-                required 
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-                />
+              <DatePicker className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black" id="departured-time" 
+              showTimeInput
+              selected={new Date(departured_time)}
+              dateFormat={`dd-MMMM-yyyy HH:mm`}
+              onChange={(date) => setDepatured_time(date || new Date())}
+              />
               </div>
               <div className="my-2 border rounded-md p-3">
                 <small className="text-sm font-semibold text-sky-600">
                  Arived Time
                 </small>
-                <input type="date" id="type" 
-                value={arrived_time} 
-                onChange={(e) => setArived_time(e.target.value)}
-                required 
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-                />
+                <DatePicker className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black" id="departured-time" 
+                showTimeInput
+              selected={new Date(arrived_time)}
+              dateFormat={`dd-MMMM-yyyy HH:mm`}
+              onChange={(date) => setArived_time(date || new Date())}/>
               </div>
               <div className="my-2 border rounded-md p-3">
                 <small className="text-sm font-semibold text-sky-600">
                  Train Id
                 </small>
-                <input type="text" id="type" 
+                <select id="type" 
                 value={trainId.toString()} 
                 onChange={(e) => setTrainId(Number(e.target.value))}
                 required 
                 className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-                />
+                >
+                   <option value="">Pilih Jenis Kereta</option>
+                {
+                  myprops.trains.map((train, index) => (
+                    <option key={index} value={train.id}>{train.name}</option>
+                  ))
+                }
+                </select>
+
+               
               </div>
               <div className="my-2 border rounded-md p-3">
                 <small className="text-sm font-semibold text-sky-600">
@@ -150,6 +163,15 @@ const AddSchedule = () => {
                 className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
                 />
               </div>
+            </div>
+
+            <div className="w-full p-3 rounded-b-lg flex items-center justify-end gap-2">
+             <button type="button" onClick={() => closeModal()}
+              className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-md"
+              >Close</button>
+             <button type="submit"
+              className="px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white rounded-md"
+              >Submit</button>
             </div>
             </form>
         </Modal>
