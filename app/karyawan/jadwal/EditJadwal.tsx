@@ -6,7 +6,7 @@ import { getStoresCookie } from "@/helper/client.cookie";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { Schedule, Train } from "../types";
+import { Schedule, Train } from "../../types";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 
@@ -18,10 +18,18 @@ type props = {
 const EditJadwal = (myProps: props) => {
   const router = useRouter();
   const [show, setShow] = useState<boolean>(false);
-  const [departured_location, setDeparturedLocation] = useState<string>(myProps.jadwal.departured_location);
-  const [arrived_location, setArrivedLocation] = useState<string>(myProps.jadwal.arrived_location);
-  const [departured_time, setDeparturedTime] = useState<Date>(new Date(myProps.jadwal.departured_time));
-  const [arrived_time, setArrivedTime] = useState<Date>(new Date(myProps.jadwal.arrived_time));
+  const [departured_location, setDeparturedLocation] = useState<string>(
+    myProps.jadwal.departured_location
+  );
+  const [arrived_location, setArrivedLocation] = useState<string>(
+    myProps.jadwal.arrived_location
+  );
+  const [departured_time, setDeparturedTime] = useState<Date>(
+    new Date(myProps.jadwal.departured_time)
+  );
+  const [arrived_time, setArrivedTime] = useState<Date>(
+    new Date(myProps.jadwal.arrived_time)
+  );
   const [train_id, setTrainId] = useState<number>(myProps.jadwal.train_id);
   const [price, setPrice] = useState<number>(myProps.jadwal.price);
 
@@ -202,15 +210,16 @@ const EditJadwal = (myProps: props) => {
                 disabled
               >
                 <option value="">Pilih Jenis Kereta</option>
-                {myProps.trains && myProps.trains.map((kereta, index) => (
-                  <option
-                    className="rounded-md shadow-sm border-none"
-                    key={`optionKereta-${index}`}
-                    value={kereta.id}
-                  >
-                    {kereta.name}
-                  </option>
-                ))}
+                {myProps.trains &&
+                  myProps.trains.map((kereta, index) => (
+                    <option
+                      className="rounded-md shadow-sm border-none"
+                      key={`optionKereta-${index}`}
+                      value={kereta.id}
+                    >
+                      {kereta.name}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>

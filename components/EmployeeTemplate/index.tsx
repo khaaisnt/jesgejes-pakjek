@@ -80,13 +80,13 @@ const EmployeeTemplate = (myprops: props) => {
             Data Kereta
           </Link>
           <Link
-            href={`/karyawan/admin`}
+            href={`/karyawan/employee`}
             className="w-full rounded-md text-white p-3 font-semibold duration-200  hover:bg-blue-500"
           >
             Data Petugas
           </Link>
           <Link
-            href={`/karyawan/pelanggan`}
+            href={`/karyawan/customer`}
             className="w-full rounded-md text-white p-3 font-semibold duration-200  hover:bg-blue-500"
           >
             Data Pelanggan

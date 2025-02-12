@@ -1,16 +1,15 @@
 import { getServerCookie } from "@/helper/server.cookie";
-import { Employee } from "../types";
+import { Customer } from "../types";
 import { axiosInstance } from "@/helper/api";
-import AddAdmin from "./AddAdmin";
-import EmployeeData from "./Admin";
-import Sidebar from "@/components/sidebar";
+import CustomerData from "./Customer";
+import AddCustomer from "./AddCustomer";
 
-const getAllAdmin = async (): Promise<Employee[]> => {
+const getAllCustomer = async (): Promise<Customer[]> => {
   try {
     const token = await getServerCookie("token");
     console.log(token);
 
-    const response: any = await axiosInstance.get("/employee", {
+    const response: any = await axiosInstance.get("/customer", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,21 +25,21 @@ const getAllAdmin = async (): Promise<Employee[]> => {
   }
 };
 
-const adminPage = async () => {
-  const dataAdmin = await getAllAdmin();
+const customerPage = async () => {
+  const dataCustomer = await getAllCustomer();
 
   return (
       <div className="w-full p-5 bg-white h-screen">
-        <h1 className="text-2xl font-bold text-black">Data Karyawan</h1>
+        <h1 className="text-2xl font-bold text-black">Data Pelanggan</h1>
         <span>Halaman ini memuat data karyawan SekopTix</span>
         <div className="my-3">
-          <AddAdmin />
-          {dataAdmin.map((admin, index) => (
-            <EmployeeData item={admin} key={`admin-${index}`} />
+          <AddCustomer />
+          {dataCustomer.map((customer, index) => (
+            <CustomerData item={customer} key={`customer-${index}`} />
           ))}
         </div>
       </div>
   );
 };
 
-export default adminPage;
+export default customerPage;

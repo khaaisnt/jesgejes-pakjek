@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import DatePicker from "react-datepicker";
 import { toast, ToastContainer } from "react-toastify";
-import { Train } from "../types";
+import { Train } from "../../types";
 import "react-datepicker/dist/react-datepicker.css";
 
 type props = {

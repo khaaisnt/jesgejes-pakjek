@@ -2,8 +2,8 @@
 
 import Link from "next/link"
 import { Customer } from "../types"
-import DeleteCustomer from "./DeletePelanggan"
-import EditCustomer from "./EditPelanggan"
+import DeleteCustomer from "./DeleteCustomer"
+import EditCustomer from "./EditCustomer"
 import ForgotPasswordCustomer from "./ForgotPassword"
 
 interface props {
