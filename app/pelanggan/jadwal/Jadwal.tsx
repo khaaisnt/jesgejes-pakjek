@@ -56,8 +56,8 @@ const Jadwal = (myProps: props) => {
       </div>
       <div className="w-full flex flex-col  md:w-2/12 p-2">
         <small className="text-sm text-blue-700 font-medium">Opsi</small>
-        <Link href={`/pelanggan/pesan/${myProps.item.id}`}>
-          <button className="bg-blue-700 hover:bg-blue-600 transition-all text-white px-4 py-2 rounded-md">
+        <Link href={`/pelanggan/jadwal/${myProps.item.id}`}>
+          <button className="bg-purple-700 hover:bg-purple-600 transition-all text-white px-4 py-2 rounded-md">
             Pesan
           </button>
         </Link>

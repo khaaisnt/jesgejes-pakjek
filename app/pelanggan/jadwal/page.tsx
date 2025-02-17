@@ -25,12 +25,15 @@ const getJadwal = async (departured_location: string, arrived_location: string):
 };
 
 type props = {
-    queryParam: Record<string, string | string[] | undefined>
+    searchParams: {
+        departured_location?: string
+        arrived_location?: string
+    }
 }
 
 const JadwalPage = async (myProps: props) => {
-    const departured_location = myProps.queryParam?.departured_location?.toString() || ""
-    const arrived_location = myProps.queryParam?.arrived_location?.toString() || ""
+    const departured_location = (await myProps.searchParams).departured_location?.toString() || ""
+    const arrived_location = (await myProps.searchParams).arrived_location?.toString() || ""
     const dataJadwal = await getJadwal(departured_location, arrived_location)
 
     return (

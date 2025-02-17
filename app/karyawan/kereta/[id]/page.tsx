@@ -3,7 +3,6 @@ import { Train } from "../../types";
 import { axiosInstance } from "@/helper/api";
 import Gerbong from "./gerbong";
 import AddGerbong from "./addGerbong";
-import Sidebar from "@/components/sidebar";
 
 const getDetailKereta = async (id: string): Promise<Train | null> => {
   try {
@@ -37,32 +36,27 @@ const DetailsKereta = async (myprops: props) => {
   const data = await getDetailKereta(id);
 
   return (
-    <div className="md:flex">
-      <Sidebar />
-      <div className="w-full p-3">
-        {data === null ? (
-          <div className="bg-yellow-100 rounded-md p-3">
-            <h1 className="text-lg font-semibold">Informasi</h1>
-            <p className="text-sm text-slate-500">
-              Data kereta tidak ditemukan
-            </p>
-          </div>
-        ) : (
-          <div>
-            <h1 className="text-xl font-semibold">{data.name}</h1>
-            <p className="text-base">{data.descriptions}</p>
-            <h2 className="text-lg font-medium mt-3">Daftar Gerbong</h2>
+    <div className="w-full p-3">
+      {data === null ? (
+        <div className="bg-yellow-100 rounded-md p-3">
+          <h1 className="text-lg font-semibold">Informasi</h1>
+          <p className="text-sm text-slate-500">Data kereta tidak ditemukan</p>
+        </div>
+      ) : (
+        <div>
+          <h1 className="text-xl font-semibold">{data.name}</h1>
+          <p className="text-base">{data.descriptions}</p>
+          <h2 className="text-lg font-medium mt-3">Daftar Gerbong</h2>
 
-            <AddGerbong id={Number(id)} />
+          <AddGerbong id={Number(id)} />
 
-            <div className="my-5">
-              {data.wagons.map((gerbong, index) => (
-                <Gerbong item={gerbong} key={`keyGerbong-${index}`} />
-              ))}
-            </div>
+          <div className="my-5">
+            {data.wagons.map((gerbong, index) => (
+              <Gerbong item={gerbong} key={`keyGerbong-${index}`} />
+            ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
