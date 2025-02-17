@@ -35,7 +35,7 @@ const LoginPage = () => {
 
       if (response.data.role === "ADMIN") {
         setTimeout(() => router.replace("/karyawan/kereta"), 1000);
-      }else if (response.data.role === `CUSTOMER `) {
+      } else if (response.data.role === `CUSTOMER`) {
         setTimeout(() => router.replace("/pelanggan/jadwal"), 1000);
       }
     } catch (error) {
