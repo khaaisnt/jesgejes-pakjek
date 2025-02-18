@@ -33,9 +33,16 @@ const LoginPage = () => {
         type:'success',
       })
 
-      if (response.data.role === 'ADMIN') {
-        setTimeout(() => router.replace('/karyawan/kereta'), 1000)
-      }
+      // Redirect based on the role
+    if (response.data.role === 'ADMIN') {
+      setTimeout(() => {
+        router.replace('/karyawan/Customer'); // Redirect to karyawan page for admins
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        router.replace('/pelanggan/Jadwal'); // Redirect to pelanggan page for other users
+      }, 1000);
+    }
 
      } catch (error) {
       console.log(error)
