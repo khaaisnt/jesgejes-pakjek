@@ -23,6 +23,7 @@ interface seat {
   id: number
   seat_number: string
   wagon_id: number
+  used: boolean
   createdAt: string
   updatedAt: string
 }
@@ -62,5 +63,27 @@ interface ScheduleTypes {
   createdAt: string
   updatedAt: string
   train_details: Train
+}
+
+interface Purcase {
+  id: number
+  purchase_id: number
+  passanger_id: string
+  passanger_name: string
+  seat_number: string
+  createdAt: string
+  updatedAt: string
+}
+
+interface History {
+    id: number;
+    purchase_date: string; 
+    customer_id: number;
+    schedule_id: number;
+    app_user_token: string;
+    createdAt: string; 
+    updatedAt: string;
+    purchases_details: Purcase[]
+    schedule_details: ScheduleTypes
 }
 
