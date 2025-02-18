@@ -1,4 +1,3 @@
-import TrainData from "@/app/karyawan/kereta/Kereta";
 import { Schedule, Train } from "@/app/karyawan/types";
 import Link from "next/link";
 

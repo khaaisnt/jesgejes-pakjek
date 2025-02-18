@@ -1,12 +1,11 @@
 "use client";
 import { Seat } from "@/app/karyawan/types";
 import Modal from "@/components/modal";
-import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 type SeatBook = {
-    passenger_id: string;
-    passenger_name: string;
+    passanger_id: string;
+    passanger_name: string;
     seat_number: string;
 }
 
@@ -17,12 +16,12 @@ type props = {
 
 const Seats = (myProps: props) => {
   const [show, setShow] = useState<boolean>(false);
-  const [passenger_id, setPassengerId] = useState<string>("");
-  const [passenger_name, setPassengerName] = useState<string>("");
+  const [passanger_id, setPassangerId] = useState<string>("");
+  const [passanger_name, setPassangerName] = useState<string>("");
   const openModal = () => {
     setShow(true);
-    setPassengerId("")
-    setPassengerName("")
+    setPassangerId("")
+    setPassangerName("")
   }
   const closeModal = () => setShow(false);
 
@@ -31,8 +30,8 @@ const Seats = (myProps: props) => {
         e.preventDefault();
         setShow(false);
         myProps.onSave({
-            passenger_id,
-            passenger_name,
+            passanger_id,
+            passanger_name,
             seat_number: myProps.item.seat_number
         })
     } catch (error) {
@@ -79,8 +78,8 @@ const Seats = (myProps: props) => {
                 type="number"
                 id={`nik-${myProps.item.id}`}
                 required={true}
-                value={passenger_id}
-                onChange={e => setPassengerId(e.target.value)}
+                value={passanger_id}
+                onChange={e => setPassangerId(e.target.value)}
                 className="w-full p-2 rounded-md border border-slate-400 text-sm"
                 />
             </div>
@@ -92,8 +91,8 @@ const Seats = (myProps: props) => {
                 type="text"
                 id={`nama-${myProps.item.id}`}
                 required={true}
-                value={passenger_name}
-                onChange={e => setPassengerName(e.target.value)}
+                value={passanger_name}
+                onChange={e => setPassangerName(e.target.value)}
                 className="w-full p-2 rounded-md border border-slate-400 text-sm"
                 />
             </div>
