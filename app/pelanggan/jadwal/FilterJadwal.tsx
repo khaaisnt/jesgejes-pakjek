@@ -52,7 +52,7 @@ const FilterJadwal = (myProps: props) => {
         />
       </div>
       <button
-        className="bg-purple-600 mx-3 hover:bg-purple-500 transition-all duration-200 text-white px-4 py-2 rounded-md"
+        className="bg-orange-600 mx-3 hover:bg-orange-500 transition-all duration-200 text-white px-4 py-2 rounded-md"
         onClick={handleSearch}
       >
         Cari Kereta
