@@ -4,6 +4,7 @@ import { ScheduleTypes } from '@/app/karyawan/types'
 import { axiosInstance } from '@/helper/api'
 import { getServerCookie } from '@/helper/server.cookie'
 import Schedule from './Schedule'
+export const dynamic = "force-dynamic";
 
 interface props {
     searchParams: {
@@ -38,8 +39,8 @@ const getJadwal = async (
 }
 
 const JadwalPage = async (myprops: props) => {
-    const departured_location = await myprops.searchParams!.departured_location.toString()
-    const arrived_location = await myprops.searchParams!.arrived_location.toString()
+    const departured_location = await myprops.searchParams!.departured_location
+    const arrived_location = await myprops.searchParams!.arrived_location
 
     const listJadwal = await getJadwal(departured_location, arrived_location)
 

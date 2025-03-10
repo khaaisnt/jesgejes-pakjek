@@ -3,6 +3,7 @@ import { Train } from "../types";
 import { axiosInstance } from "@/helper/api";
 import TrainData from "./Train";
 import AddKereta from "./addKereta";
+export const dynamic = "force-dynamic";
 
 const getAllTrain = async (): Promise<Train[]> => {
         try {
