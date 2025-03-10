@@ -4,6 +4,7 @@ import { axiosInstance } from '@/helper/api'
 import { getServerCookie } from '@/helper/server.cookie'
 import Schedule from './Schedule'
 import AddSchedule from './AddSchedule'
+export const dynamic = "force-dynamic";
 
 const getAllTrain = async (): Promise<Train[]> => {
         try {

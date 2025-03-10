@@ -1,17 +1,6 @@
-import { Purcase, ScheduleTypes, Train } from "@/app/karyawan/types";
+import { History } from "@/app/karyawan/types";
 import { showTime } from "../../Jadwal/Schedule";
 
-interface History {
-   id: number;
-   purchase_date: string; 
-   customer_id: number;
-   schedule_id: number;
-   app_user_token: string;
-   createdAt: string; 
-   updatedAt: string;
-   purchases_details: Purcase[]
-   schedule_details: ScheduleTypes
-}
 
 interface Props {
   item: History

@@ -3,6 +3,7 @@ import { getServerCookie } from '@/helper/server.cookie'
 import { axiosInstance } from '@/helper/api'
 import Addemployee from './Addemployee'
 import Employee from './Employee'
+export const dynamic = "force-dynamic";
 
 const getAllEmployee = async (): Promise<User[]> => {
         try {
