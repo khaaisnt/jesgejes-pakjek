@@ -139,7 +139,6 @@ const AddKereta = () => {
                 >
                   <option value="">Pilih tipe kereta</option>
                   <option value="Ekonomi">Ekonomi</option>
-                  <option value="Bisnis">Bisnis</option>
                   <option value="Eksekutif">Eksekutif</option>
                 </select>
               </div>

@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { axiosInstance } from "@/helper/api";
-import { getStoresCookie, storesCookie } from "@/helper/client.cookkie";
+import { getStoresCookie } from "@/helper/client.cookkie";
 import { toast, ToastContainer } from "react-toastify";
 import Modal from "@/components/modal";
 import DatePicker from "react-datepicker";
@@ -84,20 +84,22 @@ const EditSchedule = (myprops: props) => {
       });
     }
   };
+
   return (
     <div>
       <ToastContainer containerId={`EditSchedule-${myprops.schedule.id}`} />
       <button
         onClick={openModal}
-        className="px-4 py-2 rounded-md bg-lime-600 hover:bg-lime-500 text-white"
+        className="p-2 bg-sky-600 hover:bg-sky-500 rounded-lg text-white transition-all duration-200"
+        title="Edit Jadwal"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
+          strokeWidth={2}
           stroke="currentColor"
-          className="size-6"
+          className="w-4 h-4"
         >
           <path
             strokeLinecap="round"
@@ -106,116 +108,170 @@ const EditSchedule = (myprops: props) => {
           />
         </svg>
       </button>
+
       <Modal isShow={show}>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <div className="w-full p-3 rounded-t-md">
-            <h1 className="font-semibold text-lg text-black">Tambah Jadwal</h1>
-            <span className="text-sm text-slate-500">
-              Pastikan data terisi dengan benar
-            </span>
+        <form onSubmit={(e) => handleSubmit(e)} className="w-full">
+          <div className="w-full p-6 border-b bg-gradient-to-r from-sky-600 to-sky-700">
+            <div className="flex items-center gap-3">
+              <div>
+                <h1 className="text-xl font-semibold text-white">
+                  Edit Jadwal
+                </h1>
+                <p className="text-sm text-sky-100">
+                  Pastikan data terisi dengan benar
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="w-full p-3">
-            <div className="my-2 border rounded-md p-3">
-              <small className="text-sm font-semibold text-sky-600">
-                Depature Location
-              </small>
-              <input
-                type="text"
-                id="name"
-                value={from}
-                onChange={(e) => setFrom(e.target.value)}
-                required
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-              />
-            </div>
-            <div className="my-2 border rounded-md p-3">
-              <small className="text-sm font-semibold text-sky-600">
-                Arive Location
-              </small>
-              <input
-                type="text"
-                id="descriptions"
-                value={to}
-                onChange={(e) => setTo(e.target.value)}
-                required
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-              />
-            </div>
-            <div className="my-2 border rounded-md p-3">
-              <small className="text-sm font-semibold text-sky-600">
-                Departured Time
-              </small>
-              <DatePicker
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-                id="departured-time"
-                showTimeInput
-                selected={new Date(departured_time)}
-                dateFormat={`dd-MMMM-yyyy HH:mm`}
-                onChange={(date) => setDepatured_time(date || new Date())}
-              />
-            </div>
-            <div className="my-2 border rounded-md p-3">
-              <small className="text-sm font-semibold text-sky-600">
-                Arived Time
-              </small>
-              <DatePicker
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-                id="departured-time"
-                showTimeInput
-                selected={new Date(arrived_time)}
-                dateFormat={`dd-MMMM-yyyy HH:mm`}
-                onChange={(date) => setArived_time(date || new Date())}
-              />
-            </div>
-            <div className="my-2 border rounded-md p-3">
-              <small className="text-sm font-semibold text-sky-600">
-                Train Id
-              </small>
-              <select
-                id="type"
-                value={trainId.toString()}
-                onChange={(e) => setTrainId(Number(e.target.value))}
-                required
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-                disabled
+          <div className="w-full p-6 space-y-4">
+            {/* Departure Location */}
+            <div className="space-y-2">
+              <label
+                htmlFor="from"
+                className="block text-sm font-medium text-gray-700"
               >
-                 <option value="">Pilih Jenis Kereta</option>
-                {
-                  myprops.trains.map((train, index) => (
-                    <option key={index} value={train.id}>{train.name}</option>
-                  ))
-                }
-              </select>
+                Lokasi Keberangkatan
+              </label>
+              <div className="relative rounded-lg border border-gray-300 shadow-sm focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500">
+                <input
+                  type="text"
+                  id="from"
+                  value={from}
+                  onChange={(e) => setFrom(e.target.value)}
+                  required
+                  className="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm"
+                  placeholder="Masukkan lokasi keberangkatan"
+                />
+              </div>
             </div>
-            <div className="my-2 border rounded-md p-3">
-              <small className="text-sm font-semibold text-sky-600">
-                Price
-              </small>
-              <input
-                type="text"
-                id="type"
-                value={price.toString()}
-                onChange={(e) => setPrice(Number(e.target.value))}
-                required
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-              />
+
+            {/* Arrival Location */}
+            <div className="space-y-2">
+              <label
+                htmlFor="to"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Lokasi Kedatangan
+              </label>
+              <div className="relative rounded-lg border border-gray-300 shadow-sm focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500">
+                <input
+                  type="text"
+                  id="to"
+                  value={to}
+                  onChange={(e) => setTo(e.target.value)}
+                  required
+                  className="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm"
+                  placeholder="Masukkan lokasi kedatangan"
+                />
+              </div>
+            </div>
+
+            {/* Departure Time */}
+            <div className="space-y-2">
+              <label
+                htmlFor="departured_time"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Waktu Keberangkatan
+              </label>
+              <div className="relative rounded-lg border border-gray-300 shadow-sm focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500">
+                <DatePicker
+                  id="departured_time"
+                  selected={departured_time}
+                  onChange={(date) => setDepatured_time(date || new Date())}
+                  showTimeInput
+                  dateFormat="dd MMMM yyyy HH:mm"
+                  className="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm"
+                />
+              </div>
+            </div>
+
+            {/* Arrival Time */}
+            <div className="space-y-2">
+              <label
+                htmlFor="arrived_time"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Waktu Kedatangan
+              </label>
+              <div className="relative rounded-lg border border-gray-300 shadow-sm focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500">
+                <DatePicker
+                  id="arrived_time"
+                  selected={arrived_time}
+                  onChange={(date) => setArived_time(date || new Date())}
+                  showTimeInput
+                  dateFormat="dd MMMM yyyy HH:mm"
+                  className="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm"
+                />
+              </div>
+            </div>
+
+            {/* Train Selection */}
+            <div className="space-y-2">
+              <label
+                htmlFor="train"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Kereta
+              </label>
+              <div className="relative rounded-lg border border-gray-300 bg-gray-50 shadow-sm">
+                <select
+                  id="train"
+                  value={trainId}
+                  onChange={(e) => setTrainId(Number(e.target.value))}
+                  disabled
+                  className="block w-full rounded-lg border-0 py-3 px-4 text-gray-500 focus:outline-none sm:text-sm"
+                >
+                  <option value="">Pilih Kereta</option>
+                  {myprops.trains.map((train) => (
+                    <option key={train.id} value={train.id}>
+                      {train.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Price */}
+            <div className="space-y-2">
+              <label
+                htmlFor="price"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Harga
+              </label>
+              <div className="relative rounded-lg border border-gray-300 shadow-sm focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-gray-500 sm:text-sm">Rp</span>
+                </div>
+                <input
+                  type="number"
+                  id="price"
+                  value={price}
+                  onChange={(e) => setPrice(Number(e.target.value))}
+                  required
+                  min="0"
+                  className="block w-full rounded-lg border-0 py-3 pl-12 pr-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm"
+                  placeholder="0"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="w-full p-3 rounded-b-lg flex items-center justify-end gap-2">
+          <div className="w-full px-6 py-4 bg-gray-50 border-t flex items-center justify-end gap-3">
             <button
               type="button"
-              onClick={() => closeModal()}
-              className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-md"
+              onClick={closeModal}
+              className="px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-200"
             >
-              Close
+              Batal
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white rounded-md"
+              className="px-4 py-2.5 rounded-lg bg-sky-600 text-white font-medium hover:bg-sky-500 transition-colors duration-200"
             >
-              Submit
+              Simpan
             </button>
           </div>
         </form>

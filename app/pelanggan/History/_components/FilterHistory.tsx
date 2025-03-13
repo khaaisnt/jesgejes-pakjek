@@ -36,7 +36,7 @@ const FilterHistory = ({
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-700 to-blue-600 rounded-lg shadow-xl p-6 w-full px-10">
+    <div className="bg-gradient-to-r from-sky-600 to-sky-700 rounded-lg shadow-xl p-6 w-full px-10">
       <h3 className="text-xl font-bold text-white mb-4">
         Filter Riwayat Transaksi
       </h3>

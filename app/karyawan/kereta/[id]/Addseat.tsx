@@ -73,44 +73,44 @@ const Addseat = (myprops: props) => {
       </button>
       <Modal isShow={show}>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div className="w-full p-3 rounded-t-md">
-            <h1 className="font-semibold text-lg text-black">
-              Tambah Kursi Kereta
-            </h1>
-            <span className="text-sm text-slate-500">
+          <div className="w-full p-6 border-b bg-gradient-to-r from-sky-600 to-sky-700">
+            <h1 className="text-xl font-semibold text-white">Tambah Kursi</h1>
+            <p className="text-sm text-sky-100 mt-1">
               Pastikan data terisi dengan benar
-            </span>
+            </p>
           </div>
 
           <div className="w-full p-3">
-            <div className="my-2 border rounded-md p-3">
-              <small className="text-sm font-semibold text-sky-600">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
                 Seat Number
-              </small>
-              <input
-                type="text"
-                id="name"
-                value={seatNumber}
-                onChange={(e) => setSeatNumber(e.target.value)}
-                required
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
-              />
+              </label>
+              <div className="relative rounded-lg border border-gray-300 shadow-sm focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500">
+                <input
+                  type="text"
+                  id="name"
+                  value={seatNumber}
+                  onChange={(e) => setSeatNumber(e.target.value)}
+                  required
+                  className="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="w-full p-3 rounded-b-lg flex items-center justify-end gap-2">
+          <div className="w-full px-6 py-4 bg-gray-50 border-t flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={() => closeModal()}
-              className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-md"
+              className="px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-200"
             >
-              Close
+              Batal
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white rounded-md"
+              className="px-4 py-2.5 rounded-lg bg-sky-600 text-white font-medium hover:bg-sky-500 transition-colors duration-200"
             >
-              Submit
+              Simpan
             </button>
           </div>
         </form>

@@ -54,8 +54,7 @@ const Page = async ({ searchParams }: Props) => {
 
   return (
     <div className="mx-auto p-6">
-      {/* Header Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 mb-8">
+      <div className="bg-gradient-to-r from-sky-600 to-sky-700 rounded-xl shadow-lg p-6 mb-8">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-white/10 rounded-lg">
             <svg
@@ -82,7 +81,6 @@ const Page = async ({ searchParams }: Props) => {
         </div>
       </div>
 
-      {/* Filter Section */}
       <div className="mb-8">
         <FilterHistory
           start_date={start_date ? new Date(start_date) : new Date()}
@@ -90,7 +88,6 @@ const Page = async ({ searchParams }: Props) => {
         />
       </div>
 
-      {/* History List Section */}
       <div className="space-y-4">
         {historyData.length > 0 ? (
           <>

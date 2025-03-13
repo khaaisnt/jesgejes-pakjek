@@ -46,79 +46,90 @@ const Seat = (props: Props) => {
         disabled={props.item.used}
         onClick={() => openModal()}
         type="button"
-        className="size-14 flex items-center justify-center font-semibold rounded-md bg-sky-600 disabled:bg-slate-600 text-white"
+        className={`
+          size-14 flex items-center justify-center font-medium rounded-lg 
+          transition-all duration-200 relative group
+          ${
+            props.item.used
+              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+              : "bg-sky-600 hover:bg-sky-500 text-white hover:shadow-md"
+          }
+        `}
       >
-        {props.item.seat_number}
+        <div className="relative">
+          <span>{props.item.seat_number}</span>
+        </div>
       </button>
 
       <Modal isShow={show}>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <div className="w-full p-3 rounded-t-md">
-            <h1 className="font-semibold text-lg text-black">Pesan Kursi</h1>
-            <span className="text-sm text-slate-500">
+        <form onSubmit={(e) => handleSubmit(e)} className="w-full">
+          <div className="w-full p-6 border-b bg-gradient-to-r from-sky-600 to-sky-700">
+            <h1 className="text-xl font-semibold text-white">Pesan Kursi</h1>
+            <p className="text-sm text-sky-100 mt-1">
               Pastikan data terisi dengan benar
-            </span>
+            </p>
+            <div className="inline-block mt-3 px-3 py-1 bg-sky-500/20 backdrop-blur-sm rounded-lg">
+              <span className="text-sm font-medium text-white">
+                Kursi {props.item.seat_number}
+              </span>
+            </div>
           </div>
 
-          <div className="w-full px-3">
-            <div>
-              <div>
-                <small className="text-xs font-semibold text-sky-600">
-                  Kursi : {props.item.seat_number}
-                </small>
-              </div>
-            </div>
-            <div>
-              <div>
-                <small className="text-xs font-semibold text-sky-600">
-                  NIK
-                </small>
-              </div>
-              <div className="my-2">
+          <div className="w-full p-6 space-y-4">
+            <div className="space-y-2">
+              <label
+                htmlFor={`NIK-${props.item.id}`}
+                className="block text-sm font-medium text-gray-700"
+              >
+                Nomor Induk Kependudukan (NIK)
+              </label>
+              <div className="relative rounded-lg border border-gray-300 shadow-sm focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500">
                 <input
                   type="number"
-                  className="w-full p-2 border rounded-md text-sm"
-                  placeholder="Nomor Induk Kependudukan"
+                  id={`NIK-${props.item.id}`}
                   value={passanger_id}
                   onChange={(e) => setPasanger_id(e.target.value)}
-                  id={`NIK-${props.item.id}`}
                   required
+                  className="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm"
+                  placeholder="Masukkan 16 digit NIK"
                 />
               </div>
             </div>
-            <div>
-              <div>
-                <small className="text-xs font-semibold text-sky-600">
-                  Name
-                </small>
-              </div>
-              <div className="my-2">
+
+            <div className="space-y-2">
+              <label
+                htmlFor={`Name-${props.item.id}`}
+                className="block text-sm font-medium text-gray-700"
+              >
+                Nama Lengkap
+              </label>
+              <div className="relative rounded-lg border border-gray-300 shadow-sm focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500">
                 <input
                   type="text"
-                  className="w-full p-2 border rounded-md text-sm"
-                  placeholder="Nama lengkap"
+                  id={`Name-${props.item.id}`}
                   value={passanger_name}
                   onChange={(e) => setPasanger_name(e.target.value)}
-                  id={`Name-${props.item.id}`}
                   required
+                  className="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm"
+                  placeholder="Masukkan nama lengkap"
                 />
               </div>
             </div>
           </div>
 
-          <div className="w-full p-3 rounded-b-lg flex items-center justify-end gap-2">
+          <div className="w-full px-6 py-4 bg-gray-50 border-t flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={() => closeModal()}
-              className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-md"
+              className="px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-200"
             >
-              Close
+              Batal
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white rounded-md"
+              className="px-4 py-2.5 rounded-lg bg-sky-600 text-white font-medium hover:bg-sky-500 transition-colors duration-200"
             >
-              Submit
+              Simpan
             </button>
           </div>
         </form>
