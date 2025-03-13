@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import EmployeeTemplate from "@/components/modal/EmployeeTemplate";
 
 export const metadata: Metadata = {
-  title: "Tix Train",
-  description: "Sekopling Express",
+  title: "Sekopling Jesgejes",
+  description: "Platform untuk memesan tiket kereta api",
 };
 
 export default function RootLayout({

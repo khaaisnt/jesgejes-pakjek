@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getStoresCookie } from "@/helper/client.cookkie";
@@ -7,71 +7,76 @@ import { toast, ToastContainer } from "react-toastify";
 import Modal from "@/components/modal";
 
 interface props {
-    seatName: string
-    seatId: number
+  seatName: string;
+  seatId: number;
 }
 
 const Editseat = (myprops: props) => {
-  const [name, setName] = useState<string>(myprops.seatName)
-  const [show, setShow] = useState<boolean>(false)
-  const router = useRouter()
+  const [name, setName] = useState<string>(myprops.seatName);
+  const [show, setShow] = useState<boolean>(false);
+  const router = useRouter();
 
   const openModal = () => {
-    setName(myprops.seatName)
-    setShow(true)
-  }
+    setName(myprops.seatName);
+    setShow(true);
+  };
 
   const closeModal = () => {
-    setShow(false)
-    setName(myprops.seatName)
-  }
+    setShow(false);
+    setName(myprops.seatName);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault() // Pindahkan ke awal agar tidak ada event default yang berjalan
+    e.preventDefault(); // Pindahkan ke awal agar tidak ada event default yang berjalan
     try {
-      const  cookie = getStoresCookie('token')
-      const response: any = await axiosInstance.put(`/train/wagon/seat/${myprops.seatId}`, {
-        seat_number: name
-      }, {
-        headers: {
-          Authorization: `Bearer ${cookie}`,
+      const cookie = getStoresCookie("token");
+      const response: any = await axiosInstance.put(
+        `/train/wagon/seat/${myprops.seatId}`,
+        {
+          seat_number: name,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${cookie}`,
+          },
         }
+      );
+
+      const message = response.data.message;
+
+      if (!response.data.success) {
+        toast(message, {
+          type: "warning",
+          containerId: `toastEdit-${myprops.seatId}`,
+        });
       }
-    )
 
-    const message = response.data.message
-
-    if (!response.data.success) {
+      setShow(false);
       toast(message, {
-                type:'warning',
-                containerId: `toastEdit-${myprops.seatId}`,
-      })
-    }
+        type: "success",
+        containerId: `toastEdit-${myprops.seatId}`,
+      });
 
-    setShow(false)
-    toast(message, {
-      type:'success',
-      containerId: `toastEdit-${myprops.seatId}`
-    })
-    
-   setTimeout(() => router.refresh(), 1000)
+      setTimeout(() => router.refresh(), 1000);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast(
         `Something went wrong`,
 
         {
           toastId: `toastEdit-${myprops.seatId}`,
-          type: 'error',
+          type: "error",
         }
-      )  
+      );
     }
-  }
+  };
   return (
     <div>
-      <ToastContainer containerId={`toastEdit-${myprops.seatId}`}/>
-      <button type="button" onClick={() => openModal()}
-      className="px-2 py-1 bg-sky-600 hover:bg-sky-500 rounded-md text-white"
+      <ToastContainer containerId={`toastEdit-${myprops.seatId}`} />
+      <button
+        type="button"
+        onClick={() => openModal()}
+        className="px-2 py-1 bg-sky-600 hover:bg-sky-500 rounded-md text-white"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -89,38 +94,46 @@ const Editseat = (myprops: props) => {
         </svg>
       </button>
       <Modal isShow={show}>
-      <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="w-full p-3 rounded-t-md">
-              <h1 className="font-semibold text-lg text-black">Edit Kursi</h1>
-              <span className="text-sm text-slate-500">
-                Pastikan data terisi dengan benar
-              </span>
-            </div>
-            
-            <div className="w-full p-3">
-              <div className="my-2 border rounded-md p-3">
-                <small className="text-sm font-semibold text-sky-600">
-                  Number Seat
-                </small>
-                <input type="text" id={`name-${myprops.seatId}`} 
-                value={name} 
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="w-full p-3 rounded-t-md">
+            <h1 className="font-semibold text-lg text-black">Edit Kursi</h1>
+            <span className="text-sm text-slate-500">
+              Pastikan data terisi dengan benar
+            </span>
+          </div>
+
+          <div className="w-full p-3">
+            <div className="my-2 border rounded-md p-3">
+              <small className="text-sm font-semibold text-sky-600">
+                Number Seat
+              </small>
+              <input
+                type="text"
+                id={`name-${myprops.seatId}`}
+                value={name}
                 onChange={(e) => setName(e.target.value)}
-                required 
-                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black" 
-                />
-              </div>
+                required
+                className="p-1 w-full outline-none focus:border-sky-600 focus:border-b text-black"
+              />
             </div>
+          </div>
 
-            <div className="w-full p-3 rounded-b-lg flex items-center justify-end gap-2">
-             <button type="button" onClick={() => closeModal()}
+          <div className="w-full p-3 rounded-b-lg flex items-center justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => closeModal()}
               className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-md"
-              >Close</button>
-             <button type="submit"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
               className="px-4 py-2 bg-sky-700 hover:bg-sky-600 text-white rounded-md"
-              >Submit</button>
-            </div>
-
-          </form>
+            >
+              Submit
+            </button>
+          </div>
+        </form>
       </Modal>
     </div>
   );

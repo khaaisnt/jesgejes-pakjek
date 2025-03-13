@@ -1,15 +1,14 @@
 import { History } from "@/app/karyawan/types";
 import { showTime } from "../../Jadwal/Schedule";
 
-
 interface Props {
-  item: History
+  item: History;
 }
 
 const HistoryCard = (props: Props) => {
   return (
-    <div className='bg-white rounded-lg shadow-lg border border-gray-200 p-6 w-full transition-all hover:shadow-xl'>
-      <div className='grid grid-cols-4 gap-6 mb-8'>
+    <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6 w-full transition-all hover:shadow-xl">
+      <div className="grid grid-cols-4 gap-6 mb-8">
         <InfoSection
           title="TGL ORDER"
           content={showTime(props.item.purchase_date)}
@@ -36,17 +35,29 @@ const HistoryCard = (props: Props) => {
           <table className="w-full">
             <thead className="bg-sky-50">
               <tr>
-                <th className="text-sky-600 text-sm font-bold py-3 px-4 text-left">Nama</th>
-                <th className="text-sky-600 text-sm font-bold py-3 px-4 text-left">NIK</th>
-                <th className="text-sky-600 text-sm font-bold py-3 px-4 text-left">Nomor</th>
+                <th className="text-sky-600 text-sm font-bold py-3 px-4 text-left">
+                  Nama
+                </th>
+                <th className="text-sky-600 text-sm font-bold py-3 px-4 text-left">
+                  NIK
+                </th>
+                <th className="text-sky-600 text-sm font-bold py-3 px-4 text-left">
+                  Nomor
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {props.item.purchases_details.map((item, index) => (
                 <tr key={index} className="hover:bg-gray-50">
-                  <td className="py-3 px-4 text-sm text-gray-800">{item.passanger_name}</td>
-                  <td className="py-3 px-4 text-sm text-gray-800">{item.passanger_id}</td>
-                  <td className="py-3 px-4 text-sm text-gray-800">{item.seat_number}</td>
+                  <td className="py-3 px-4 text-sm text-gray-800">
+                    {item.passanger_name}
+                  </td>
+                  <td className="py-3 px-4 text-sm text-gray-800">
+                    {item.passanger_id}
+                  </td>
+                  <td className="py-3 px-4 text-sm text-gray-800">
+                    {item.seat_number}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -57,13 +68,17 @@ const HistoryCard = (props: Props) => {
   );
 };
 
-const InfoSection = ({ title, content, subContent }: { 
+const InfoSection = ({
+  title,
+  content,
+  subContent,
+}: {
   title: string;
   content: string;
   subContent?: string;
 }) => (
-  <div className='space-y-2'>
-    <div className='font-bold text-sky-600 text-lg'>{title}</div>
+  <div className="space-y-2">
+    <div className="font-bold text-sky-600 text-lg">{title}</div>
     <div className="font-semibold text-gray-800">{content}</div>
     {subContent && (
       <div className="font-medium text-gray-600">{subContent}</div>

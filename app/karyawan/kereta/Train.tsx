@@ -38,10 +38,10 @@ const TrainData = ({ item }: props) => {
 
         <div className="w-full md:w-2/12 mb-4 md:mb-0">
           <div className="space-y-1">
-            <small className="text-sm font-medium text-gray-500">
+            <small className="text-sm font-medium text-gray-500 block">
               Tipe Kereta
             </small>
-            <span className="px-3 py-1 text-sm font-medium text-sky-700 bg-sky-50 rounded-full">
+            <span className="px-3 py-1 text-sm max-w-[90px] font-medium text-sky-700 bg-sky-50 rounded-full block">
               {item.type}
             </span>
           </div>
