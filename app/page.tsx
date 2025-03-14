@@ -116,7 +116,7 @@ const LoginPage = () => {
               type="submit"
               className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors duration-200"
             >
-              Sign in
+              Login
               <span className="absolute right-3 inset-y-0 flex items-center pl-3">
                 <svg
                   className="h-5 w-5 text-sky-100 group-hover:text-sky-200"
